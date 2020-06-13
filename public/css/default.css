@@ -1,0 +1,123 @@
+/* COLORS */
+    .warros-blue{
+    background-color:#23438b;
+    }
+    
+    .warros-gold{
+    background-color:#fcb827;
+    }
+    
+    .warros-black{
+    background-color:#26282a;
+    }
+    
+    .warros-blue-gradient{
+        background: #23438b;
+        background: -moz-linear-gradient(left, #23438b 0%, #347cf7 100%);
+        background: -webkit-gradient(left top, right top, color-stop(0%, #23438b), color-stop(100%, #347cf7));
+        background: -webkit-linear-gradient(left, #23438b 0%, #347cf7 100%);
+        background: -o-linear-gradient(left, #23438b 0%, #347cf7 100%);
+        background: -ms-linear-gradient(left, #23438b 0%, #347cf7 100%);
+        background: linear-gradient(to right, #23438b 0%, #347cf7 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#23438b', endColorstr='#347cf7', GradientType=1 );
+        }
+    
+/* FONTS */
+    @font-face {
+        font-family: warros;
+        src: url(/public/fonts/BebasNeue.otf);
+      }
+
+
+html body{
+    font-size: 24px;
+    font-family: warros;
+}
+
+body h1{
+    font-size: 70px;
+}
+
+body h2{
+    font-size: 60px;
+}
+
+body h3{
+    font-size: 50px;
+}
+
+body p{
+    margin-right: 10%;
+    margin-left: 10%;
+}
+
+.inicio{
+    background-color:rgb(0, 3, 29) !important;
+  }
+
+
+  /*NAVBAR  */
+.navbar-brand img{
+    width: 100px;
+    height: 100px;
+}
+
+/* CARRUSEL */
+.carousel {
+    height: calc(100vh - 126px);
+}
+.carousel-inner,.carousel-item {
+    height: 100%;
+}
+.carousel-item { 
+    background: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+  #carruselInicio{
+	position:fixed;
+	width:100%;
+	height:100%;
+    z-index:-1;
+    opacity:0.4
+  }
+
+.superficie{
+    position:center;
+    z-index:1 !important;    
+    align-content: center;
+    text-align: center;
+    color: white;
+
+}
+
+/* REDES SOCIALES */
+.fa-facebook-f:hover {
+    color: #3b5998;
+}
+
+
+.fa-instagram:hover {
+    background: -webkit-radial-gradient(33% 100% circle, #FED373 4%, #F15245 30%, #D92E7F 62%, #9B36B7 85%, #515ECF);
+    background: radial-gradient(circle at 33% 100%, #FED373 4%, #F15245 30%, #D92E7F 62%, #9B36B7 85%, #515ECF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+}
+
+
+.fa-twitter:hover {
+    color: #00acee;
+}
+
+.fa-envelope:hover {
+    color: #fcb827;
+}
+.contacto a{
+    color: white;
+}
+
+
