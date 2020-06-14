@@ -23,15 +23,11 @@
         }
     
 /* FONTS */
-    @font-face {
-        font-family: warros;
-        src: url(fonts\BebasNeue.otf);
-      }
+font-family: 'Bebas Neue', cursive;
 
-
-html body{
+html body {
     font-size: 24px;
-    font-family: warros;
+    font-family: 'Bebas Neue';
 }
 
 body h1{
@@ -47,9 +43,56 @@ body h3{
 }
 
 body p{
+    font-size: 24px;
     margin-right: 10%;
     margin-left: 10%;
+    text-align: justify;
 }
+
+@media (min-width:320px)  { 
+    /* smartphones, iPhone, portrait 480x320 phones */
+    .superficie h1{
+        font-size:50px;
+        color:Green;
+    }
+
+    body p{
+        font-size: 20px;
+    }
+}
+
+
+
+@media (min-width:641px)  { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ 
+    .superficie h1{
+        font-size:50px;
+        color:red;
+    }
+}
+@media (min-width:961px)  { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
+    .superficie h1{
+        font-size:50px;
+        color:yellow;
+    }
+}
+@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */
+    .superficie h1{
+        font-size:50px;
+        color:purple;
+    }
+}
+@media (min-width:1281px) { /* hi-res laptops and desktops */ 
+    .superficie h1{
+        font-size:50px;
+        color:pink;
+    }
+}
+
+
+
+
+
+
 
 .inicio{
     background-color:rgb(0, 3, 29) !important;
