@@ -1,0 +1,13 @@
+.botones-menu button{
+    height:150px;
+    width: 150px;
+}
+
+.botones-menu{
+    margin-top: 5vh;  
+}
+
+#equipo-seleccionado{
+    font-size:18px;
+    color: rgb(0, 0, 124);
+}

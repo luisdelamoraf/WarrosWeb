@@ -1,0 +1,142 @@
+@media (min-width:320px)  { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ 
+    .btn_stats{
+        height:100px;
+        width: 100px;
+        font-size: 20px !important;
+    }
+    .btn_points{
+        height:100px;
+        width: 100px;
+        font-size: 20px !important;
+    }
+    .btn_player{
+        height:100px;
+        width: 100px;
+        font-size: 20px !important;
+    }
+    .btn_assist_player{
+        height:100px;
+        width: 100px;
+        font-size: 20px !important;
+    }
+    .btn_undo{
+        height:100px;
+        width: 100px;
+        font-size: 30px !important;
+    }
+    .btn_undoRival{
+        height:100px;
+        width: 306px;
+        font-size: 40px !important;
+    }
+    .btn_rival{
+        height:100px;
+        width: 202px;
+        font-size: 20px !important;
+    }
+    .btn_nadie{
+        height:100px;
+        width: 202px;
+        font-size: 20px !important;
+    }
+    .btn-group .btn-secondary{
+        box-shadow: none !important;
+    }
+    .stats-tables{
+        display: none;
+    }
+    .assist-table{
+        display: none;
+    }
+    .points-table{
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .marcador{
+        font-size: 30px;
+        margin-bottom: 15px;
+    }
+    .btn-group{
+        margin-bottom: 10px;
+    }
+    .banner-assist{
+        height:100px;
+        width: 100px;
+        font-size: 20px !important;
+        text-align: center;
+        color: black !important;
+
+    }
+}
+@media (min-width:641px)  { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
+    .btn_stats{
+        height:100px;
+        width: 150px;
+        font-size: 30px !important;
+    }
+    .btn_points{
+        height:100px;
+        width: 150px;
+        font-size: 30px !important;
+    }
+    .btn_player{
+        height:100px;
+        width: 200px;
+        font-size: 30px !important;
+    }
+    .btn_assist_player{
+        height:100px;
+        width: 200px;
+        font-size: 30px !important;
+    }
+    .btn_rival{
+        height:100px;
+        width: 402px;
+        font-size: 30px !important;
+    }
+    .btn_nadie{
+        height:100px;
+        width: 402px;
+        font-size: 30px !important;
+    }
+    .btn_undo{
+        height:100px;
+        width: 200px;
+        font-size: 40px !important;
+    }
+    .btn_undoRival{
+        height:100px;
+        width: 460px;
+        font-size: 40px !important;
+    }
+    .btn-group .btn-secondary{
+        box-shadow: none !important;
+    }
+    .stats-table{
+        display: none;
+    }
+    .assist-table{
+        display: none;
+    }
+    .points-table{
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .marcador{
+        font-size: 40px;
+    }
+    .btn-group{
+        margin-bottom: 10px;
+    }
+    .banner-assist{
+        height:100px;
+        width: 200px;
+        font-size: 40px !important;
+        text-align: center;
+        color: black !important;
+    }
+}
+
+
+
+

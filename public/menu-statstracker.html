@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>WarrosGdl</title>
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <!-- Icon -->
+    <link href="img/logos/warros_icon_180x180.png" rel="apple-touch-icon" />
+    <link rel="shortcut icon" href="img/logos/warros_blue_180x180.png" type="image/x-icon" />
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,  maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/89ac1f6cc6.js" crossorigin="anonymous"></script>
+
+
+    <!-- Menu-Statstracker CSS -->
+    <link rel="stylesheet" href="css/menu-statstracker.css">
+    
+    <!-- Default CSS -->
+    <link rel="stylesheet" href="css/default.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-sm navbar-dark warros-blue-gradient">
+        <a class="navbar-brand" href="index.html"> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i></i> </a>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link">Menu Statstracker 1.0 <span class="sr-only"></span></a>
+                </li>
+            </ul>
+    </nav>
+    <!-- ./Navbar -->
+
+    <!-- Botones Menú -->
+    <div class="d-flex justify-content-center">
+        <table class="botones-menu">
+            <tr>
+                <td>
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal-nuevo-partido">
+                        Nuevo Partido
+                        <br> <i class="fa fa-basketball-ball" aria-hidden="true"></i>
+                    </button>
+                </td>
+                <td>
+                    <button type="button" id="assist-p1" class="btn btn-primary btn-lg">
+                        Ver Partidos
+                        <br> <i class="fa fa-list" aria-hidden="true"></i>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal-crear-equipo">
+                        Crear Equipo
+                        <br> <i class="fa fa-users" aria-hidden="true"></i>
+                    </button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal-editar-equipo">
+                        Editar Equipo
+                        <br> <i class="fa fa-user-edit" aria-hidden="true"></i>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="button" id="assist-p1" class="btn btn-primary btn-lg">
+                        Ver estadísticas
+                        <br> <i class="fa fa-chart-line" aria-hidden="true"></i>
+                    </button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal-anadir-liga">
+                        Añadir Liga
+                        <br> <i class="fa fa-plus-square" aria-hidden="true"></i>
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+
+    <!-- Modal Nuevo Partido -->
+    <div class="modal fade" id="modal-nuevo-partido" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Nuevo partido</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group form">
+                        <label for="Liga">Liga</label>
+                        <div class="input-group"></div>
+                        <div class= "input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"> <i class="fas fa-basketball-ball"></i></span>
+                            <select class="custom-select" id="partidoLiga">
+                                <option value="ABE">ABE</option>
+                                <option value="Local">Local</option>
+                                <option value="Amistoso">Amistoso</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group form">
+                        <label for="Equipo">Equipo</label>
+                        <div class="input-group"></div>
+                        <div class= "input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"> <i class="fas fa-users"></i></span>
+                            <select class="custom-select" id="partidoEquipo">
+                                <option value="ITESO">ITESO</option>
+                                <option value="2">2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group form">
+                    <label for="Rival" >Rival</label>
+                    <div class="input-group">
+                        <div class= "input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"> <i class="fas fa-users-slash"></i></span>
+                        </div>
+                    <input type="text" name="Rival" id="partidoRival" class="form-control" placeholder="Equipo rival" aria-describedby="helpId">
+                    </div>
+                    </div>
+                    <div class="form-group form">
+                        <label for="Partido">Fecha</label>
+                        <div class="input-group">
+                        <div class= "input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"> <i class="fas fa-calendar-alt"></i></span>
+                        </div>
+                    <input type="date" name="Partido" id="partidoFecha" class="form-control" aria-describedby="helpId">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" id="btn-nuevo-partido" class="btn btn-primary">Añadir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Crear Equipo -->
+    <div class="modal fade" id="modal-crear-equipo" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Nuevo Equipo</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group form">
+                        <label for="Nombre" >Nombre del equipo</label>
+                        <div class="input-group">
+                            <div class= "input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"> <i class="fas fa-users"></i></span>
+                            </div>
+                            <input type="text" name="Nombre" id="nombre-nuevo-equipo" class="form-control" placeholder="Nombre del equipo" aria-describedby="helpId">
+                        </div>
+                    </div>
+                    <h4>Jugadores</h4>
+                    <div class="jugadores-activos">
+                        <p>Todavía no hay jugadores en este equipo</p> 
+                    </div>
+                    <hr>
+                    <br>
+                    <h4>Añadir Jugadores</h4>
+                    <hr>
+                    <table class="d-flex justify-content-center">
+                        <tr>
+                            <td>
+                                <div class="form-group form">
+                                    <label for="Nombre" >Nombre</label>
+                                    <div class="input-group">
+                                        <div class= "input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"> <i class="fas fa-user"></i></span>
+                                        </div>
+                                        <input type="text" name="Nombre" id="nombre-jugador" class="form-control" placeholder="Nombre y apellido" aria-describedby="helpId">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group form">
+                                    <label for="Nombre" >Número </label>
+                                    <div class="input-group">
+                                        <div class= "input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"> <i class="fas fa-id-card"></i></span>
+                                        </div>
+                                        <input type="text" name="Nombre" id="numero-jugador" class="form-control" placeholder="Número de uniforme" aria-describedby="helpId">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group form">
+                                    <label for="Estatura" >Altura</label>
+                                    <div class="input-group">
+                                        <div class= "input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"> <i class="fas fa-ruler-vertical"></i></span>
+                                        </div>
+                                        <input type="number" name="Estatura" id="altura-jugador" class="form-control" placeholder="Altura en cm" aria-describedby="helpId">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group form">
+                                    <label for="Peso" >Peso</label>
+                                    <div class="input-group">
+                                        <div class= "input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"> <i class="fas fa-weight"></i></span>
+                                        </div>
+                                        <input type="number" name="Peso" id="peso-jugador" class="form-control" placeholder="peso en kg" aria-describedby="helpId">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button type="button" class="btn btn-primary">Agregar jugador</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Editar Equipo -->
+    <div class="modal fade" id="modal-editar-equipo" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Editar Equipo</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group form">
+                        <label for="especie">Equipo</label>
+                        <div class="input-group"></div>
+                        <div class= "input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"> <i class="fas fa-users"></i></span>
+                            <select class="custom-select" id="equipo">
+                                <option value="1">ITESO</option>
+                                <option value="2">B</option>
+                                <option value="3">C</option>
+                            </select>
+                        </div>
+                    </div>
+                    <h4>Jugadores</h4>
+                    <div class="jugadores-activos">
+                        <p>Todavía no hay jugadores en este equipo</p> 
+                    </div>
+                    <hr>
+                    <br>
+                    <h4>Añadir Jugadores</h4>
+                    <hr>
+                    <table class="d-flex justify-content-center">
+                        <tr>
+                            <td>
+                                <div class="form-group form">
+                                    <label for="Nombre" >Nombre</label>
+                                    <div class="input-group">
+                                        <div class= "input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"> <i class="fas fa-user"></i></span>
+                                        </div>
+                                        <input type="text" name="Nombre" id="editar-nombre-jugador" class="form-control" placeholder="Nombre y apellido" aria-describedby="helpId">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group form">
+                                    <label for="Nombre" >Número </label>
+                                    <div class="input-group">
+                                        <div class= "input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"> <i class="fas fa-id-card"></i></span>
+                                        </div>
+                                        <input type="text" name="Nombre" id="editar-numero-jugador" class="form-control" placeholder="Número de uniforme" aria-describedby="helpId">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group form">
+                                    <label for="Estatura" >Altura</label>
+                                    <div class="input-group">
+                                        <div class= "input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"> <i class="fas fa-ruler-vertical"></i></span>
+                                        </div>
+                                        <input type="number" name="Estatura" id="editar-altura-jugador" class="form-control" placeholder="Altura en cm" aria-describedby="helpId">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group form">
+                                    <label for="Peso" >Peso</label>
+                                    <div class="input-group">
+                                        <div class= "input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"> <i class="fas fa-weight"></i></span>
+                                        </div>
+                                        <input type="number" name="Peso" id="editar-peso-jugador" class="form-control" placeholder="peso en kg" aria-describedby="helpId">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button type="button" class="btn btn-primary">Agregar jugador</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Añadir Liga -->
+    <div class="modal fade" id="modal-anadir-liga" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Añadir liga</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group form">
+                    <label for="Nombre" >Nombre</label>
+                    <div class="input-group">
+                        <div class= "input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"> <i class="fas fa-basketball-ball"></i></span>
+                        </div>
+                    <input type="text" name="Nombre" id="nombre-nueva-liga" class="form-control" placeholder="Nombre de la liga" aria-describedby="helpId">
+                    </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Añadir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Seleccionar Jugadores -->
+    <div class="modal fade" id="modal-seleccion-jugadores" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Selecciona los jugadores para este partido</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="equipo-seleccionado">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="go-to-match"class="btn btn-primary">Avanzar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+
+    <!--JavaScript -->
+    <script src="js/menu-statstracker.js"></script>
+
+
+</body>
+
+</html>

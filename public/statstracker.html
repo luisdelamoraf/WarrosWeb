@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>WarrosGdl</title>
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <!-- Icon -->
+    <link href="img/logos/warros_icon_180x180.png" rel="apple-touch-icon" />
+    <link rel="shortcut icon" href="img/logos/warros_blue_180x180.png" type="image/x-icon" />
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,  maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/89ac1f6cc6.js" crossorigin="anonymous"></script>
+
+
+    <!-- Statstracker CSS -->
+    <link rel="stylesheet" href="css/statstracker.css">
+    
+    <!-- Default CSS -->
+    <link rel="stylesheet" href="css/default.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-sm navbar-dark warros-blue-gradient">
+        <a class="navbar-brand" href="menu-statstracker.html"> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i></i> </a>
+        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
+            aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link">STATS TRACKER 1.0 <span class="sr-only"></span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- ./Navbar -->
+
+    <!-- Marcador -->
+    <div class="marcador">
+        <div class="d-flex flex-row justify-content-center">
+            <div class="p-2">
+                <div id="team-a">
+                    Team A
+                </div>
+            </div>
+            <div class="p-2">
+                <div id="score-a">
+                    00
+                </div>
+            </div>
+            <div class="p-2">
+                -
+            </div>
+            <div class="p-2">
+                <div id="score-b">
+                    00
+                </div>
+            </div>
+            <div class="p-2">
+                <div id="team-b">
+                    Team B
+                </div>
+            </div>
+        </div>
+        <div class="d-flex flex-row justify-content-center">
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-secondary active">
+                  <input type="radio" name="options" id="q1" autocomplete="off"> Q1
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio" name="options" id="q2" autocomplete="off"> Q2
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio" name="options" id="q3" autocomplete="off"> Q3
+                </label>
+                <label class="btn btn-secondary">
+                    <input type="radio" name="options" id="q4" autocomplete="off"> Q4
+                </label>
+                <label class="btn btn-secondary">
+                    <input type="radio" name="options" id="ot" autocomplete="off"> OT
+                </label>
+            </div>
+        </div>
+    </div>
+    <!-- ./Marcador -->
+
+    <!--Stats-->
+    <div class="d-flex justify-content-center">
+        <table class="stats-tables">
+            <tr><td>
+                    <table class="points-table">
+                        <tr>
+                            <td>
+                                <button type="button" id="ft-made" class="btn btn-success btn_stats">Free throw</button>
+                            </td>
+                            <td>
+                                <button type="button" id="2pt-made" class="btn btn-success btn_points">2pt</button>
+                            </td>
+                            <td>
+                                <button type="button" id="3pt-made" class="btn btn-success btn_points">3pt</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button type="button" id="ft-miss"  class="btn btn-danger btn_stats">Free throw</button>
+                            </td>
+                            <td>
+                                <button type="button" id="2pt-miss"  class="btn btn-danger btn_stats">2pt</button>
+                            </td>
+                            <td>
+                                <button type="button" id="3pt-miss"  class="btn btn-danger btn_stats">3pt</button>
+                            </td>
+                        </tr>
+                    </table>
+            </td></tr>
+            <tr><td><br></td></tr>
+            <tr><td>
+                    <table class="otherstats-table">
+                        <tr>
+                            <td>
+                                <button type="button" id="reb-def" class="btn btn-success btn_stats">Def. Reb.</button>
+                            </td>
+                            <td>
+                                <button type="button" id="steal" class="btn btn-success btn_stats">Steal</button>
+                            </td>
+                            <td>
+                                <button type="button" id="block" class="btn btn-success btn_stats">Block</button>
+                            </td>
+                            <td>
+                                <button type="button" id="assist" class="btn btn-success btn_stats">Asist</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button type="button" id="reb-off" class="btn btn-success btn_stats">Off. Reb</button>
+                            </td>
+                            <td>
+                                <button type="button" id="TO" class="btn btn-danger btn_stats">Turnover</button>
+                            </td>
+                            <td>
+                                <button type="button" id="foul" class="btn btn-danger btn_stats">Foul</button>
+                            </td>
+                            <td>
+                                <button type="button" id="undo" class="btn btn-secondary btn_stats"> <i class="fa fa-undo" aria-hidden="true"></i> </button>
+                            </td>
+                        </tr>
+                    </table>
+            </td></tr>
+            <tr>
+                <td>
+                    <button type="button" id="undoRival" class="btn btn-secondary btn_undoRival"> <i class="fa fa-undo" aria-hidden="true"></i> </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="d-flex justify-content-center">
+        <table class="assist-table">
+            <tr>
+                <td>
+                    <button type="button" class="btn btn-outline-secondary disabled banner-assist">Asistido por:</button>
+                </td>
+                <td colspan="2">
+                    <button type="button" class="btn btn-secondary btn_nadie">Nadie</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="button" id="assist-p1" class="Player-1 btn btn-success btn_assist_player">Jugador 1</button>
+                </td>
+                <td>
+                    <button type="button" id="assist-p2" class="Player-2 btn btn-success btn_assist_player">Jugador 2</button>
+                </td>
+                <td>
+                    <button type="button" id="assist-p3" class="Player-3 btn btn-success btn_assist_player">Jugador 3</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="button" id="assist-p4" class="Player-4 btn btn-success btn_assist_player">Jugador 4</button>
+                </td>
+                <td>
+                    <button type="button" id="assist-p5" class="Player-5 btn btn-success btn_assist_player">Jugador 5</button>
+                </td>
+                <td>
+                    <button type="button" id="assist-p6" class="Player-6 btn btn-success btn_assist_player">Jugador 6</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="button" id="assist-p7" class="Player-7 btn btn-success btn_assist_player">Jugador 7</button>
+                </td>
+                <td>
+                    <button type="button" id="assist-p8" class="Player-8 btn btn-success btn_assist_player">Jugador 8</button>
+                </td>
+                <td>
+                    <button type="button" id="assist-p9" class="Player-9 btn btn-success btn_assist_player">Jugador 9</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="button" id="assist-p10" class="Player-10 btn btn-success btn_assist_player">Jugador 10</button>
+                </td>
+                <td>
+                    <button type="button" id="assist-p11" class="Player-11 btn btn-success btn_assist_player">Jugador 11</button>
+                </td>
+                <td>
+                    <button type="button" id="assist-p12" class="Player-12 btn btn-success btn_assist_player">Jugador 12</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="button" id="assist-p13" class="Player-13 btn btn-success btn_assist_player">Jugador 13</button>
+                </td>
+                <td>
+                    <button type="button" id="assist-p14" class="Player-14 btn btn-success btn_assist_player">Jugador 14</button>
+                </td>
+                <td>
+                    <button type="button" id="assist-p15" class="Player-15 btn btn-success btn_assist_player">Jugador 15</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- ./Stats -->
+
+    <!-- Players -->
+    <div class="players d-flex justify-content-center">
+        <table class="players-table">
+            <tr>
+                <td>
+                    <button type="button" id="p1" value="0" disabled="true" class="Player-1 btn btn-primary btn_player">Jugador 1</button>
+                </td>
+                <td>
+                    <button type="button" id="p2" value="0" disabled="true" class="Player-2 btn btn-primary btn_player">Jugador 2</button>
+                </td>
+                <td>
+                    <button type="button" id="p3" value="0" disabled="true" class="Player-3 btn btn-primary btn_player">Jugador 3</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="button" id="p4" value="0" disabled="true" class="Player-4 btn btn-primary btn_player">Jugador 4</button>
+                </td>
+                <td>
+                    <button type="button" id="p5" value="0" disabled="true" class="Player-5 btn btn-primary btn_player">Jugador 5</button>
+                </td>
+                <td>
+                    <button type="button" id="p6" value="0" disabled="true" class="Player-6 btn btn-primary btn_player">Jugador 6</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="button" id="p7" value="0" disabled="true" class="Player-7 btn btn-primary btn_player">Jugador 7</button>
+                </td>
+                <td>
+                    <button type="button" id="p8" value="0" disabled="true" class="Player-8 btn btn-primary btn_player">Jugador 8</button>
+                </td>
+                <td>
+                    <button type="button" id="p9" value="0" disabled="true" class="Player-9 btn btn-primary btn_player">Jugador 9</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="button" id="p10" value="0" disabled="true" class="Player-10 btn btn-primary btn_player">Jugador 10</button>
+                </td>
+                <td>
+                    <button type="button" id="p11" value="0" disabled="true" class="Player-11 btn btn-primary btn_player">Jugador 11</button>
+                </td>
+                <td>
+                    <button type="button" id="p12" value="0" disabled="true" class="Player-12 btn btn-primary btn_player">Jugador 12</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="button" id="p13" value="0" disabled="true" class="Player-13 btn btn-primary btn_player">Jugador 13</button>
+                </td>
+                <td>
+                    <button type="button" id="p14" value="0" disabled="true" class="Player-14 btn btn-primary btn_player">Jugador 14</button>
+                </td>
+                <td>
+                    <button type="button" id="p15" value="0" disabled="true" class="Player-15 btn btn-primary btn_player">Jugador 15</button>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" >
+                    <button type="button" class="rival-team btn btn-secondary btn_rival">Rival team</button>
+                </td>
+                <td>
+                    <button type="button" id="undo-action" class="btn btn-danger btn_undo"> <i class="fa fa-undo" aria-hidden="true"></i> </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- ./Players -->
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+
+
+    <!--JavaScript -->
+    <script src="js/statstracker.js"></script>
+
+
+</body>
+
+</html>

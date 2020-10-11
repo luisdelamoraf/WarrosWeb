@@ -23,7 +23,7 @@
         }
     
 /* FONTS */
-font-family: 'Bebas Neue', cursive;
+
 
 html body {
     font-size: 24px;
@@ -53,7 +53,6 @@ body p{
     /* smartphones, iPhone, portrait 480x320 phones */
     .superficie h1{
         font-size:50px;
-        color:Green;
     }
 
     body p{
@@ -61,30 +60,24 @@ body p{
     }
 }
 
-
-
 @media (min-width:641px)  { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ 
     .superficie h1{
         font-size:50px;
-        color:red;
     }
 }
 @media (min-width:961px)  { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
     .superficie h1{
         font-size:50px;
-        color:yellow;
     }
 }
 @media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */
     .superficie h1{
         font-size:50px;
-        color:purple;
     }
 }
 @media (min-width:1281px) { /* hi-res laptops and desktops */ 
     .superficie h1{
         font-size:50px;
-        color:pink;
     }
 }
 
