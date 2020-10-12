@@ -11,3 +11,16 @@
     font-size:18px;
     color: rgb(0, 0, 124);
 }
+
+#jugadores-activos{
+    font-size:18px;
+    color: rgb(0, 0, 124);
+}
+
+#btn-editar-jugador{
+    display: none;
+}
+
+#regresar-agregar{
+    display: none;
+}
