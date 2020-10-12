@@ -120,6 +120,8 @@ $("#btn-nuevo-partido").click(function(){
         Equipo: partidoEquipo.value, 
         Rival: partidoRival.value, 
         Fecha: partidoFecha.value,
+        score: 0,
+        scoreRival:0
     }).then(function(){
         idPartido++
         $('#modal-nuevo-partido').modal('hide');
@@ -154,7 +156,7 @@ $("#go-to-match").click(function(){
                 })
         }
     })  
-    // window.location.replace("https://warrosweb.web.app/statstracker.html");
+    window.location.replace("https://warrosweb.web.app/statstracker.html");
 })
 
 $("#btn-crear-nuevo-equipo").click(function(){
