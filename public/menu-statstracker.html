@@ -108,9 +108,6 @@
                         <div class= "input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"> <i class="fas fa-basketball-ball"></i></span>
                             <select class="custom-select" id="partidoLiga">
-                                <option value="ABE">ABE</option>
-                                <option value="Local">Local</option>
-                                <option value="Amistoso">Amistoso</option>
                             </select>
                         </div>
                     </div>
@@ -120,8 +117,6 @@
                         <div class= "input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"> <i class="fas fa-users"></i></span>
                             <select class="custom-select" id="partidoEquipo">
-                                <option value="ITESO">ITESO</option>
-                                <option value="2">2</option>
                             </select>
                         </div>
                     </div>
@@ -172,73 +167,10 @@
                             <input type="text" name="Nombre" id="nombre-nuevo-equipo" class="form-control" placeholder="Nombre del equipo" aria-describedby="helpId">
                         </div>
                     </div>
-                    <h4>Jugadores</h4>
-                    <div class="jugadores-activos">
-                        <p>Todavía no hay jugadores en este equipo</p> 
-                    </div>
-                    <hr>
-                    <br>
-                    <h4>Añadir Jugadores</h4>
-                    <hr>
-                    <table class="d-flex justify-content-center">
-                        <tr>
-                            <td>
-                                <div class="form-group form">
-                                    <label for="Nombre" >Nombre</label>
-                                    <div class="input-group">
-                                        <div class= "input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1"> <i class="fas fa-user"></i></span>
-                                        </div>
-                                        <input type="text" name="Nombre" id="nombre-jugador" class="form-control" placeholder="Nombre y apellido" aria-describedby="helpId">
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group form">
-                                    <label for="Nombre" >Número </label>
-                                    <div class="input-group">
-                                        <div class= "input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1"> <i class="fas fa-id-card"></i></span>
-                                        </div>
-                                        <input type="text" name="Nombre" id="numero-jugador" class="form-control" placeholder="Número de uniforme" aria-describedby="helpId">
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-group form">
-                                    <label for="Estatura" >Altura</label>
-                                    <div class="input-group">
-                                        <div class= "input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1"> <i class="fas fa-ruler-vertical"></i></span>
-                                        </div>
-                                        <input type="number" name="Estatura" id="altura-jugador" class="form-control" placeholder="Altura en cm" aria-describedby="helpId">
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group form">
-                                    <label for="Peso" >Peso</label>
-                                    <div class="input-group">
-                                        <div class= "input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1"> <i class="fas fa-weight"></i></span>
-                                        </div>
-                                        <input type="number" name="Peso" id="peso-jugador" class="form-control" placeholder="peso en kg" aria-describedby="helpId">
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <button type="button" class="btn btn-primary">Agregar jugador</button>
-                            </td>
-                        </tr>
-                    </table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary">Guardar</button>
+                    <button type="button" id="btn-crear-nuevo-equipo" class="btn btn-primary">Guardar</button>
                 </div>
             </div>
         </div>
@@ -261,9 +193,6 @@
                         <div class= "input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"> <i class="fas fa-users"></i></span>
                             <select class="custom-select" id="editarEquipo">
-                                <option value="ITESO">ITESO</option>
-                                <option value="2">B</option>
-                                <option value="3">C</option>
                             </select>
                         </div>
                     </div>
@@ -361,7 +290,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary">Añadir</button>
+                    <button type="button" id="btn-anadir-liga" class="btn btn-primary">Añadir</button>
                 </div>
             </div>
         </div>

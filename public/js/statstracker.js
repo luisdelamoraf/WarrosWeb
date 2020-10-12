@@ -19,8 +19,7 @@ let scoreA = 0;
 let scoreB = 0;
 let teamSelector ="";
 let lastAction = {"Action":"","Author":"","Chained":""}
-let matchData = firestore.doc(`ligas/all/${localStorage.getItem("Liga")}/${localStorage.getItem("ID")}`)
-// let playersData = firestore.doc(`ligas/all/${localStorage.getItem("Liga")}/${localStorage.getItem("ID")}/jugadores/${lastAction.Author}`)
+let matchData = firestore.doc(`ligas/${localStorage.getItem("Liga")}/partidos/${localStorage.getItem("ID")}`)
 let partidoInfo
 let cuarto = "Q1"
 let nombreJugador
@@ -56,13 +55,7 @@ matchData.get().then(function(doc) {
 });
 // ./load match data
 
-
-
-
-
-
 // Declared Functions
-
 function sendToStorage(){
     localStorage.setItem("Action", lastAction.Action);
     localStorage.setItem("Author", lastAction.Author);
@@ -91,17 +84,18 @@ function updatePartido(){
         console.log("Error getting document:", error);
     });
 }
+function clearLocalStorage(){
+    localStorage.removeItem("Action");
+    localStorage.removeItem("Author");
+    localStorage.removeItem("Chained");
+}
+clearLocalStorage()
 // ./Declared Functions
 
 
 
 
 $(document).ready(function(){
-
-
-
-
-
 
 
 

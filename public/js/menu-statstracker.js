@@ -6,11 +6,18 @@ let partidoLiga = document.querySelector("#partidoLiga");
 let partidoEquipo = document.querySelector("#partidoEquipo");
 let partidoRival = document.querySelector("#partidoRival");
 let partidoFecha = document.querySelector("#partidoFecha");
-// Editar equipo
+// Crear Equipo
+let crearEquipo = document.querySelector("#btn-crear-nuevo-equipo");
+let nombreEquipo = document.querySelector("#nombre-nuevo-equipo");
+// Editar Equipo
 let editarEquipo = document.querySelector("#editarEquipo");
 let editarNombre = document.querySelector("#editar-nombre-jugador");
 let editarNumero = document.querySelector("#editar-numero-jugador");
 let idJugador
+// Añadir liga
+let anadirLiga = document.querySelector("#btn-anadir-liga");
+let nombreLiga = document.querySelector("#nombre-nueva-liga");
+
 
 // Inicializar firebase/firestore
 const firebaseConfig = {
@@ -30,6 +37,21 @@ var firestore = firebase.firestore()
 
 
 // Funciones
+function refrescarEquipos(){
+    $("#partidoEquipo").html(``)
+    firestore.collection("equipos").get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            $("#partidoEquipo").append(`<option value="${doc.id}">${doc.data().nombre}</option>`)
+        });
+    });
+    $("#editarEquipo").html(``)
+    firestore.collection("equipos").get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            $("#editarEquipo").append(`<option value="${doc.id}">${doc.data().nombre}</option>`)
+        });
+    });  
+}
+refrescarEquipos()
 function limpiarJugadores(){
     $("#jugadores-activos").html(``)
 }
@@ -76,13 +98,22 @@ function regresarAgregar(){
     $("#editar-nombre-jugador").val("")
     $("#editar-numero-jugador").val("")
 }
-
+function refrescarLigas(){
+    $("#partidoLiga").html(``)
+    firestore.collection("ligas").get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            $("#partidoLiga").append(`<option value="${doc.id}">${doc.data().nombre}</option>`)
+        });
+    });
+    
+}
+refrescarLigas()
 // ./Funciones
 
 
 $("#btn-nuevo-partido").click(function(){
-    let idPartido = partidoLiga.value +"_"+ partidoFecha.value +"_"+ Date.now()
-    docPartido = firestore.doc(`ligas/all/${partidoLiga.value}/${idPartido}`)
+    let idPartido = partidoLiga.value.split("_")[0] +"_"+ partidoFecha.value +"_"+ Date.now()
+    docPartido = firestore.doc(`ligas/${partidoLiga.value}/partidos/${idPartido}`)
     localStorage.setItem("Liga", partidoLiga.value)
     localStorage.setItem("ID", idPartido)
     docPartido.set({
@@ -123,9 +154,25 @@ $("#go-to-match").click(function(){
                     }
                 })
         }
-    })
-    
+    })  
     window.location.replace("https://warrosweb.web.app/statstracker.html");
+})
+
+$("#btn-crear-nuevo-equipo").click(function(){
+    if(nombreEquipo.value){
+        var equipo = firestore.collection("equipos").doc(nombreEquipo.value+"_"+Date.now());
+        equipo.set({
+            nombre: nombreEquipo.value 
+        }).then(function() {
+            refrescarEquipos()
+            alert("Equipo creado correctamente");
+        })
+        .catch(function(error) {
+            console.error("Error writing document: ", error);
+        });
+    }else{
+        alert("Nombre de equipo vacio")
+    }
 })
 
 $("#btn-editar-equipo").click(function(){
@@ -174,3 +221,19 @@ $("#regresar-agregar").click(function(){
     regresarAgregar()
 })
 
+$("#btn-anadir-liga").click(function(){
+    if(nombreLiga.value){
+        var liga = firestore.collection("ligas").doc(nombreLiga.value+"_"+Date.now());
+        liga.set({
+            nombre: nombreLiga.value 
+        }).then(function() {
+            refrescarLigas()
+            alert("Liga creada correctamente");
+        })
+        .catch(function(error) {
+            console.error("Error writing document: ", error);
+        });
+    }else{
+        alert("Nombre de liga vacio")
+    }
+});
