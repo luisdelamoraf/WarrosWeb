@@ -34,7 +34,7 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-sm navbar-dark warros-blue-gradient">
-        <a class="navbar-brand" href="index.html"> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i></i> </a>
+        <a class="navbar-brand" href="statstracker.html"> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i></i> </a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
             aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -48,12 +48,29 @@
         </div>
     </nav>
     <!-- ./Navbar -->
+    <br>
+    <div>
+        <table id="tabla-estadisticas">
+            <tr>
+                <th>No.</th>
+                <th>Jugador</th>
+                <th class="th-estadisticas">fgM</th>
+                <th class="th-estadisticas">fgA</th>
+                <th class="th-estadisticas">3pM</th>
+                <th class="th-estadisticas">3pA</th>
+                <th class="th-estadisticas">ftM</th>
+                <th class="th-estadisticas">ftA</th>
+                <th class="th-estadisticas">Rdef</th>
+                <th class="th-estadisticas">ROff</th>
+                <th class="th-estadisticas">Ast</th>
+                <th class="th-estadisticas">Stl</th>
+                <th class="th-estadisticas">Bl</th>
+                <th class="th-estadisticas">TO</th>
+                <th class="th-estadisticas">Fo</th>
+            </tr>
 
-    <div class="prueba"></div>
-    <div class="prueba2"></div>
-    <div class="prueba3"></div>
-
-
+        </table>
+    </div>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -65,6 +82,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
     <!--JavaScript -->
     <script src="js/statstable.js"></script>
 </body>
