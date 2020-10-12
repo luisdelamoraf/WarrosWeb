@@ -138,7 +138,6 @@ $("#btn-nuevo-partido").click(function(){
 $("#go-to-match").click(function(){
     $("input[type=checkbox]").each(function(){
         if(this.checked){
-            console.log(this.value);
                 docPartido.collection("jugadores").doc(this.value).set({
                     "Q1":{
                         "fgM":0,"fgA":0,"thrM":0,"thrA":0,"ftM":0,"ftA":0,"rDf":0,"rOf":0,"As":0,"St":0,"Bl":0,"Fo":0,"TO":0
@@ -155,7 +154,7 @@ $("#go-to-match").click(function(){
                 })
         }
     })  
-    window.location.replace("https://warrosweb.web.app/statstracker.html");
+    // window.location.replace("https://warrosweb.web.app/statstracker.html");
 })
 
 $("#btn-crear-nuevo-equipo").click(function(){

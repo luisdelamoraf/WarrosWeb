@@ -14,22 +14,18 @@ var firestore = firebase.firestore()
 // ./Inicializar firebase/firestore
 
 localStorage = window.localStorage;
-statsJSON ={}
-let scoreA = 0;
-let scoreB = 0;
-let teamSelector ="";
 let lastAction = {"Action":"","Author":"","Chained":""}
 let matchData = firestore.doc(`ligas/${localStorage.getItem("Liga")}/partidos/${localStorage.getItem("ID")}`)
 let partidoInfo
+let partido
 let cuarto = "Q1"
 let nombreJugador
-
 
 
 // Load match data
 matchData.get().then(function(doc) {
     if (doc.exists) {
-        $("#team-a").text(doc.data().Equipo)
+        $("#team-a").text(doc.data().Equipo.split("_")[0])
         $("#team-b").text(doc.data().Rival)
         matchData.collection("jugadores").get().then(function(querySnapshot) {
             i=-1
@@ -37,7 +33,7 @@ matchData.get().then(function(doc) {
             querySnapshot.forEach(function() {
                 i++
                 firestore.doc(`equipos/${doc.data().Equipo}/jugadores/${querySnapshot.docs[i].id}`).get().then(function(x){
-                    $(`#p${cont}`).text(x.data().nombre);
+                    $(`#p${cont}`).text(x.data().nombre);             
                     $(`#p${cont}`).attr("value", x.id);
                     $(`#p${cont}`).attr('disabled', false);
                     cont++
@@ -53,36 +49,38 @@ matchData.get().then(function(doc) {
 }).catch(function(error) {
     console.log("Error getting document:", error);
 });
+matchData.onSnapshot(function(doc) {
+    $("#score-a").text(doc.data().score)
+    $("#score-b").text(doc.data().scoreRival)
+});
 // ./load match data
 
 // Declared Functions
+function updateScore(equipo, puntos){
+    if(equipo=="A"){
+        matchData.update({
+            score:firebase.firestore.FieldValue.increment(puntos)
+        })
+    }else{
+        matchData.update({
+            scoreRival:firebase.firestore.FieldValue.increment(puntos)
+        })
+    }
+}
 function sendToStorage(){
     localStorage.setItem("Action", lastAction.Action);
     localStorage.setItem("Author", lastAction.Author);
     localStorage.setItem("Chained", lastAction.Chained);
 }
 function saveToDB(){
-    matchData.update({
-        "jugadores":{
-            [lastAction.Author]:{
-                [cuarto]:{
-                    [lastAction.Action]: partido[lastAction.Author][cuarto][lastAction.Action.toString()]++
-                }
-            }
-        } 
+    if(lastAction.Action == "ftM" ||lastAction.Action == "fgM" ||lastAction.Action == "thrM" ){
+        matchData.collection("jugadores").doc(lastAction.Author).update({
+            [`${cuarto}.${lastAction.Action.replace("M","A")}`]: firebase.firestore.FieldValue.increment(1)
+        })
+    }
+    matchData.collection("jugadores").doc(lastAction.Author).update({
+        [`${cuarto}.${lastAction.Action}`]: firebase.firestore.FieldValue.increment(1)
     })
-}
-
-function updatePartido(){
-    matchData.get().then(function(doc) {
-        if (doc.exists) {
-            partido = doc.data()
-        } else {
-            console.log("No such match!");
-        }
-    }).catch(function(error) {
-        console.log("Error getting document:", error);
-    });
 }
 function clearLocalStorage(){
     localStorage.removeItem("Action");
@@ -91,8 +89,6 @@ function clearLocalStorage(){
 }
 clearLocalStorage()
 // ./Declared Functions
-
-
 
 
 $(document).ready(function(){
@@ -116,14 +112,12 @@ $(document).ready(function(){
     })
 
     $(".btn_player").click(function(){
-        teamSelector="A";
         $(".stats-tables").show();
         $(".otherstats-table").show();
         $(".btn_undoRival").hide()
         $(".players-table").hide();
     })
     $(".btn_rival").click(function(){
-        teamSelector="B";
         lastAction.Author = "B"
         $(".stats-tables").show();
         $(".btn_undoRival").show();
@@ -135,7 +129,7 @@ $(document).ready(function(){
         $(".players-table").show();
     })
     $(".btn_points").click(function(){
-        if(teamSelector=="B"){
+        if(lastAction.Author=="B"){
             $(".stats-tables").hide();
             $(".players-table").show();
         }else{
@@ -159,14 +153,11 @@ $(document).ready(function(){
     })
     //UNDO
     $("#undo").click(function(){
-        teamSelector ="";
         lastAction.Author ="";
         lastAction.Action ="";
         lastAction.Chained ="";
     })
     $("#undoRival").click(function(){
-        teamSelector ="";
-        lastAction.Author ="";
         lastAction.Author ="";
         lastAction.Action ="";
         lastAction.Chained ="";
@@ -181,7 +172,6 @@ $(document).ready(function(){
             scoreA -= lastAction.Action;
             $("#score-a").text(scoreA);
         }
-        teamSelector ="";
         lastAction.Action="";
         lastAction.Author="";
         lastAction.Chained="";
@@ -191,220 +181,210 @@ $(document).ready(function(){
 
     // POINTS
     $("#ft-made").click(function(){
-        lastAction.Action="1"
+        lastAction.Action="ftM"
+        if (lastAction.Author =="B"){
+            updateScore("B",1)
+        }else{
+            updateScore("A",1)
+            saveToDB()
+        }
         sendToStorage()
-        saveToDB()
-        if(teamSelector == "A"){
-            scoreA++
-            $("#score-a").text(scoreA)
-            teamSelector="";
-        }
-        if (teamSelector =="B"){
-            scoreB++
-            $("#score-b").text(scoreB)
-            teamSelector="";
-            sendToStorage()
-        }
     })
     $("#ft-miss").click(function(){
-        lastAction.Action="1-miss"
+        lastAction.Action="ftA"
         sendToStorage()
+        saveToDB()
     })
    
     $("#2pt-made").click(function(){
-        lastAction.Action="2"
-        if(teamSelector == "A"){
-            scoreA+=2;
-            $("#score-a").text(scoreA)
-            teamSelector="";
-            
-            sendToStorage()
+        lastAction.Action="fgM"
+        if (lastAction.Author =="B"){
+            updateScore("B",2)
+        }else{
+            updateScore("A",2)
+            saveToDB()
         }
-        if (teamSelector =="B"){
-            scoreB+=2;
-            $("#score-b").text(scoreB)
-            teamSelector="";
-            sendToStorage()
-        }
+        sendToStorage()
     })
     $("#2pt-miss").click(function(){
-        lastAction.Action="2-miss"
-        
+        lastAction.Action="fgA"
         sendToStorage()
+        saveToDB()
     })
    
     $("#3pt-made").click(function(){
-        lastAction.Action="3"
-        if(teamSelector == "A"){
-            scoreA+=3;
-            $("#score-a").text(scoreA)
-            teamSelector="";
-            
-            sendToStorage()
+        lastAction.Action="thrM"
+        if (lastAction.Author =="B"){
+            updateScore("B",3)
+        }else{
+            updateScore("A",3)
+            saveToDB()
         }
-        if (teamSelector =="B"){
-            scoreB+=3;
-            $("#score-b").text(scoreB)
-            teamSelector="";
-            sendToStorage()
-        }
+        sendToStorage()
     })
     $("#3pt-miss").click(function(){
-        lastAction.Action="3-miss"
-        
+        lastAction.Action="thrA"
         sendToStorage()
+        saveToDB()
     })
     
     // OTHER STATS
     $("#reb-def").click(function(){
-        lastAction.Action="reb-def"
-        
+        lastAction.Action="rDf"
+        sendToStorage()
+        saveToDB()  
     })
     $("#reb-off").click(function(){
-        lastAction.Action="reb-off"
-        
+        lastAction.Action="rOf"
+        sendToStorage()
+        saveToDB()  
     })
     $("#steal").click(function(){
-        lastAction.Action="steal"
-        
+        lastAction.Action="St"
+        sendToStorage()
+        saveToDB()   
     })
     $("#TO").click(function(){
         lastAction.Action="TO"
-        
+        sendToStorage()
+        saveToDB()  
     })
     $("#block").click(function(){
-        lastAction.Action="block"
-        
+        lastAction.Action="Bl"
+        sendToStorage()
+        saveToDB() 
     })
     $("#foul").click(function(){
-        lastAction.Action="foul"
-        
+        lastAction.Action="Fo"
+        sendToStorage()
+        saveToDB()
     })
     $("#assist").click(function(){
-        lastAction.Action="assist"
-        
+        lastAction.Action="As"
+        sendToStorage()
+        saveToDB() 
     })
 
     // PLAYERS
     $("#p1").click(function(){
-        lastAction.Author="1";
+        lastAction.Author= $("#p1").attr("value");
     })
     $("#p2").click(function(){
-        lastAction.Author="2";
+        lastAction.Author=$("#p2").attr("value");
     })
     $("#p3").click(function(){
-        lastAction.Author="3";
+        lastAction.Author=$("#p3").attr("value");
     })
     $("#p4").click(function(){
-        lastAction.Author="4";
+        lastAction.Author=$("#p4").attr("value");
     })
     $("#p5").click(function(){
-        lastAction.Author="5";
+        lastAction.Author=$("#p5").attr("value");
     })
     $("#p6").click(function(){
-        lastAction.Author="6";
+        lastAction.Author=$("#p6").attr("value");
     })
     $("#p7").click(function(){
-        lastAction.Author="7";
+        lastAction.Author=$("#p7").attr("value");
     })
     $("#p8").click(function(){
-        lastAction.Author="8";
+        lastAction.Author=$("#p8").attr("value");
     })
     $("#p9").click(function(){
-        lastAction.Author="9";
+        lastAction.Author=$("#p9").attr("value");
     })
     $("#p10").click(function(){
-        lastAction.Author="10";
+        lastAction.Author=$("#p10").attr("value");
     })
     $("#p11").click(function(){
-        lastAction.Author="11";
+        lastAction.Author=$("#p11").attr("value");
     })
     $("#p12").click(function(){
-        lastAction.Author="12";
+        lastAction.Author=$("#p12").attr("value");
     })
     $("#p13").click(function(){
-        lastAction.Author="13";
+        lastAction.Author=$("#p13").attr("value");
     })
     $("#p14").click(function(){
-        lastAction.Author="14";
+        lastAction.Author=$("#p14").attr("value");
     })
     $("#p15").click(function(){
-        lastAction.Author="15";
+        lastAction.Author=$("#p15").attr("value");
     })
 
     // PLAYERS-ASSIST
     $("#assist-p1").click(function(){
-        lastAction.Chained="1";
+        lastAction.Chained=$("#p1").attr("value");
         statsJSON[0].As++
         sendToStorage()
     })
     $("#assist-p2").click(function(){
-        lastAction.Chained="2";
+        lastAction.Chained=$("#p2").attr("value");
         statsJSON[1].As++
         sendToStorage()
     })
     $("#assist-p3").click(function(){
-        lastAction.Chained="3";
+        lastAction.Chained=$("#p3").attr("value");
         statsJSON[2].As++
         sendToStorage()
     })
     $("#assist-p4").click(function(){
-        lastAction.Chained="4";
+        lastAction.Chained=$("#p4").attr("value");
         statsJSON[3].As++
         sendToStorage()
     })
     $("#assist-p5").click(function(){
-        lastAction.Chained="5";
+        lastAction.Chained=$("#p5").attr("value");
         statsJSON[4].As++
         sendToStorage()
     })
     $("#assist-p6").click(function(){
-        lastAction.Chained="6";
+        lastAction.Chained=$("#p6").attr("value");
         statsJSON[5].As++
         sendToStorage()
     })
     $("#assist-p7").click(function(){
-        lastAction.Chained="7";
+        lastAction.Chained=$("#p7").attr("value");
         statsJSON[6].As++
         sendToStorage()
     })
     $("#assist-p8").click(function(){
-        lastAction.Chained="8";
+        lastAction.Chained=$("#p0").attr("value");
         statsJSON[7].As++
         sendToStorage()
     })
     $("#assist-p9").click(function(){
-        lastAction.Chained="9";
+        lastAction.Chained=$("#p9").attr("value");
         statsJSON[8].As++
         sendToStorage()
     })
     $("#assist-p10").click(function(){
-        lastAction.Chained="10";
+        lastAction.Chained=$("#p10").attr("value");
         statsJSON[9].As++
         sendToStorage()
     })
     $("#assist-p11").click(function(){
-        lastAction.Chained="11";
+        lastAction.Chained=$("#p11").attr("value");
         statsJSON[10].As++
         sendToStorage()
     })
     $("#assist-p12").click(function(){
-        lastAction.Chained="12";
+        lastAction.Chained=$("#p12").attr("value");
         statsJSON[11].As++
         sendToStorage()
     })
     $("#assist-p13").click(function(){
-        lastAction.Chained="13";
+        lastAction.Chained=$("#p13").attr("value");
         statsJSON[12].As++
         sendToStorage()
     })
     $("#assist-p14").click(function(){
-        lastAction.Chained="14";
+        lastAction.Chained=$("#p14").attr("value");
         statsJSON[13].As++
         sendToStorage()
     })
     $("#assist-p15").click(function(){
-        lastAction.Chained="15";
+        lastAction.Chained=$("#p15").attr("value");
         statsJSON[14].As++
         sendToStorage()
   })
