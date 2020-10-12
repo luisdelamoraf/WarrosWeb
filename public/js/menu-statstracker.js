@@ -182,7 +182,7 @@ $("#btn-editar-equipo").click(function(){
 $("#btn-agregar-jugador").click(function(){
     if(editarNombre.value && editarNumero.value){
         let equipo = firestore.collection("equipos").doc(`${editarEquipo.value}`).collection("jugadores")
-        equipo.doc(editarEquipo.value+"_"+editarNumero.value+"_"+Date.now()).set({
+        equipo.doc(editarEquipo.value.split("_")[0]+"_"+editarNumero.value+"_"+Date.now()).set({
             nombre: editarNombre.value,
             numero: editarNumero.value
         }).then(function() {
