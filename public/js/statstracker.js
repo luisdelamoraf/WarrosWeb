@@ -36,6 +36,10 @@ matchData.get().then(function(doc) {
                     $(`#p${cont}`).text(x.data().nombre);             
                     $(`#p${cont}`).attr("value", x.id);
                     $(`#p${cont}`).attr('disabled', false);
+                    $(`#assist-p${cont}`).text(x.data().nombre);             
+                    $(`#assist-p${cont}`).attr("value", x.id);
+                    $(`#assist-p${cont}`).attr('disabled', false);
+                    assist-p1
                     cont++
                 }).catch(function(error) {
                     console.log("Error getting document:", error);
@@ -88,12 +92,14 @@ function clearLocalStorage(){
     localStorage.removeItem("Chained");
 }
 clearLocalStorage()
+function habilitarBtnAssist(id){
+    console.log(id);
+    $(`button[value='${id}']`).attr('disabled', false);
+}
 // ./Declared Functions
 
 
 $(document).ready(function(){
-
-
 
     $("#q1").change(function(){
         cuarto = "Q1"
@@ -268,9 +274,11 @@ $(document).ready(function(){
     // PLAYERS
     $("#p1").click(function(){
         lastAction.Author= $("#p1").attr("value");
+        $("#assist-p1").attr('disabled', true);
     })
     $("#p2").click(function(){
         lastAction.Author=$("#p2").attr("value");
+        $("#assist-p2").attr('disabled', true);
     })
     $("#p3").click(function(){
         lastAction.Author=$("#p3").attr("value");
@@ -315,79 +323,77 @@ $(document).ready(function(){
     // PLAYERS-ASSIST
     $("#assist-p1").click(function(){
         lastAction.Chained=$("#p1").attr("value");
-        statsJSON[0].As++
+        habilitarBtnAssist(lastAction.Author)
         sendToStorage()
     })
     $("#assist-p2").click(function(){
         lastAction.Chained=$("#p2").attr("value");
-        statsJSON[1].As++
+        habilitarBtnAssist(lastAction.Author)
         sendToStorage()
     })
     $("#assist-p3").click(function(){
         lastAction.Chained=$("#p3").attr("value");
-        statsJSON[2].As++
+        habilitarBtnAssist(lastAction.Author)
         sendToStorage()
     })
     $("#assist-p4").click(function(){
         lastAction.Chained=$("#p4").attr("value");
-        statsJSON[3].As++
+        habilitarBtnAssist(lastAction.Author)
         sendToStorage()
     })
     $("#assist-p5").click(function(){
         lastAction.Chained=$("#p5").attr("value");
-        statsJSON[4].As++
+        habilitarBtnAssist(lastAction.Author)
         sendToStorage()
     })
     $("#assist-p6").click(function(){
         lastAction.Chained=$("#p6").attr("value");
-        statsJSON[5].As++
+        habilitarBtnAssist(lastAction.Author)
         sendToStorage()
     })
     $("#assist-p7").click(function(){
         lastAction.Chained=$("#p7").attr("value");
-        statsJSON[6].As++
+        habilitarBtnAssist(lastAction.Author)
         sendToStorage()
     })
     $("#assist-p8").click(function(){
         lastAction.Chained=$("#p0").attr("value");
-        statsJSON[7].As++
+        habilitarBtnAssist(lastAction.Author)
         sendToStorage()
     })
     $("#assist-p9").click(function(){
         lastAction.Chained=$("#p9").attr("value");
-        statsJSON[8].As++
+        habilitarBtnAssist(lastAction.Author)
         sendToStorage()
     })
     $("#assist-p10").click(function(){
         lastAction.Chained=$("#p10").attr("value");
-        statsJSON[9].As++
+        habilitarBtnAssist(lastAction.Author)
         sendToStorage()
     })
     $("#assist-p11").click(function(){
         lastAction.Chained=$("#p11").attr("value");
-        statsJSON[10].As++
+        habilitarBtnAssist(lastAction.Author)
         sendToStorage()
     })
     $("#assist-p12").click(function(){
         lastAction.Chained=$("#p12").attr("value");
-        statsJSON[11].As++
+        habilitarBtnAssist(lastAction.Author)
         sendToStorage()
     })
     $("#assist-p13").click(function(){
         lastAction.Chained=$("#p13").attr("value");
-        statsJSON[12].As++
+        habilitarBtnAssist(lastAction.Author)
         sendToStorage()
     })
     $("#assist-p14").click(function(){
         lastAction.Chained=$("#p14").attr("value");
-        statsJSON[13].As++
+        habilitarBtnAssist(lastAction.Author)
         sendToStorage()
     })
     $("#assist-p15").click(function(){
         lastAction.Chained=$("#p15").attr("value");
-        statsJSON[14].As++
+        habilitarBtnAssist(lastAction.Author)
         sendToStorage()
   })
-
-
 });
