@@ -1,6 +1,5 @@
 table, th, td{
     font-size: large;
-    margin-left: 10px;
     border: 2px solid black;
 }
 th{
@@ -10,6 +9,10 @@ th{
     text-align: center;
     width: 4.5%;
 }
-.fila-estadistica{
+.col-numero{
+    width: 20px;
+}
 
+.col-nombre{
+    width: 150px;
 }

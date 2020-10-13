@@ -18,12 +18,11 @@ let matchData = firestore.doc(`ligas/${localStorage.getItem("Liga")}/partidos/${
 
 
 matchData.collection("jugadores").get().then(function(querySnapshot) {
-    console.log(querySnapshot);
     querySnapshot.forEach(function(doc) {
         $("#tabla-estadisticas").append(`
         <tr class="fila-estadistica">
-            <td>No.</td>
-            <td>Jugador</td>
+            <td class="col-numero" id="numero-${doc.id}"></td>
+            <td class="col-nombre" id="nombre-${doc.id}"></td>
             <td>${doc.data().Q1.fgM}</td>
             <td>${doc.data().Q1.fgA}</td>
             <td>${doc.data().Q1.thrM}</td>
@@ -39,5 +38,15 @@ matchData.collection("jugadores").get().then(function(querySnapshot) {
             <td>${doc.data().Q1.Fo}</td>
         </tr>
         `)
+    
+        matchData.get().then(function(equipo){
+            firestore.doc(`equipos/${equipo.data().Equipo}/jugadores/${doc.id}`).get().then(function(jugador){
+                $(`#nombre-${doc.id}`).html(jugador.data().nombre)  
+            })
+            firestore.doc(`equipos/${equipo.data().Equipo}/jugadores/${doc.id}`).get().then(function(jugador){
+                $(`#numero-${doc.id}`).html(jugador.data().numero)  
+            })
+        })
+
     });
 });
