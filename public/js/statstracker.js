@@ -82,6 +82,12 @@ function saveToDB(){
             [`${cuarto}.${lastAction.Action.replace("M","A")}`]: firebase.firestore.FieldValue.increment(1)
         })
     }
+    if(lastAction.Chained != ""){
+        console.log(lastAction.Chained);
+        matchData.collection("jugadores").doc(lastAction.Chained).update({
+            [`${cuarto}.As`]: firebase.firestore.FieldValue.increment(1)
+        })
+    }
     matchData.collection("jugadores").doc(lastAction.Author).update({
         [`${cuarto}.${lastAction.Action}`]: firebase.firestore.FieldValue.increment(1)
     })
@@ -93,7 +99,6 @@ function clearLocalStorage(){
 }
 clearLocalStorage()
 function habilitarBtnAssist(id){
-    console.log(id);
     $(`button[value='${id}']`).attr('disabled', false);
 }
 // ./Declared Functions
@@ -149,6 +154,7 @@ $(document).ready(function(){
         $(".players-table").show();
     })
     $(".btn_nadie").click(function(){
+        habilitarBtnAssist(lastAction.Author)
         $(".assist-table").hide();
         $(".players-table").show();
     })
@@ -159,6 +165,7 @@ $(document).ready(function(){
     })
     //UNDO
     $("#undo").click(function(){
+        habilitarBtnAssist(lastAction.Author)
         lastAction.Author ="";
         lastAction.Action ="";
         lastAction.Chained ="";
@@ -325,11 +332,13 @@ $(document).ready(function(){
         lastAction.Chained=$("#p1").attr("value");
         habilitarBtnAssist(lastAction.Author)
         sendToStorage()
+        saveToDB()
     })
     $("#assist-p2").click(function(){
         lastAction.Chained=$("#p2").attr("value");
         habilitarBtnAssist(lastAction.Author)
         sendToStorage()
+        saveToDB()
     })
     $("#assist-p3").click(function(){
         lastAction.Chained=$("#p3").attr("value");
