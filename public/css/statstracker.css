@@ -112,7 +112,7 @@
     .btn-group .btn-secondary{
         box-shadow: none !important;
     }
-    .stats-table{
+    /* .stats-table{
         display: none;
     }
     .assist-table{
@@ -121,7 +121,7 @@
     .points-table{
         margin-right: auto;
         margin-left: auto;
-    }
+    } */
     .marcador{
         font-size: 40px;
     }

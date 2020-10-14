@@ -14,7 +14,7 @@ var firestore = firebase.firestore()
 // ./Inicializar firebase/firestore
 
 localStorage = window.localStorage;
-let lastAction = {"Action":"","Author":"","Chained":""}
+let lastAction = {"Action":"","Author":"","Chained":"","Cuarto":""}
 let matchData = firestore.doc(`ligas/${localStorage.getItem("Liga")}/partidos/${localStorage.getItem("ID")}`)
 let partidoInfo
 let partido
@@ -75,27 +75,29 @@ function sendToStorage(){
     localStorage.setItem("Action", lastAction.Action);
     localStorage.setItem("Author", lastAction.Author);
     localStorage.setItem("Chained", lastAction.Chained);
+    localStorage.setItem("Cuarto", lastAction.Cuarto);
 }
-function saveToDB(){
+function saveToDB(x){
     if(lastAction.Action == "ftM" ||lastAction.Action == "fgM" ||lastAction.Action == "thrM" ){
         matchData.collection("jugadores").doc(lastAction.Author).update({
-            [`${cuarto}.${lastAction.Action.replace("M","A")}`]: firebase.firestore.FieldValue.increment(1)
+            [`${lastAction.Cuarto}.${lastAction.Action.replace("M","A")}`]: firebase.firestore.FieldValue.increment(x)
         })
     }
     if(lastAction.Chained != ""){
         console.log(lastAction.Chained);
         matchData.collection("jugadores").doc(lastAction.Chained).update({
-            [`${cuarto}.As`]: firebase.firestore.FieldValue.increment(1)
+            [`${lastAction.Cuarto}.As`]: firebase.firestore.FieldValue.increment(x)
         })
     }
     matchData.collection("jugadores").doc(lastAction.Author).update({
-        [`${cuarto}.${lastAction.Action}`]: firebase.firestore.FieldValue.increment(1)
+        [`${lastAction.Cuarto}.${lastAction.Action}`]: firebase.firestore.FieldValue.increment(x)
     })
 }
 function clearLocalStorage(){
     localStorage.removeItem("Action");
     localStorage.removeItem("Author");
     localStorage.removeItem("Chained");
+    localStorage.removeItem("Cuarto");
 }
 clearLocalStorage()
 function habilitarBtnAssist(id){
@@ -125,6 +127,7 @@ $(document).ready(function(){
     $(".btn_player").click(function(){
         $(".stats-tables").show();
         $(".otherstats-table").show();
+        $(".rival-miss").show();
         $(".btn_undoRival").hide()
         $(".players-table").hide();
     })
@@ -132,6 +135,7 @@ $(document).ready(function(){
         lastAction.Author = "B"
         $(".stats-tables").show();
         $(".btn_undoRival").show();
+        $(".rival-miss").hide();
         $(".otherstats-table").hide();
         $(".players-table").hide();
     })
@@ -169,113 +173,141 @@ $(document).ready(function(){
         lastAction.Author ="";
         lastAction.Action ="";
         lastAction.Chained ="";
+        lastAction.Cuarto ="";
     })
     $("#undoRival").click(function(){
         lastAction.Author ="";
         lastAction.Action ="";
         lastAction.Chained ="";
+        lastAction.Cuarto ="";
     })
-
     $("#undo-action").click(function(){
         console.log(lastAction);
-        if(lastAction.Author=="B"){
-            scoreB -= lastAction.Action;
-            $("#score-b").text(scoreB);
-        }else{
-            scoreA -= lastAction.Action;
-            $("#score-a").text(scoreA);
+        let puntos
+        switch (lastAction.Action){
+            case "ftM":
+                puntos =-1;
+                break;
+            case "fgM":
+                puntos =-2;
+                break;
+            case "thrM":
+                puntos =-3;
+                break;
+            default:
+                puntos =0;
+                break;
         }
+        if(lastAction.Author=="B"){
+            updateScore("B", puntos)
+        }else{
+            updateScore("A", puntos)
+            saveToDB(-1)
+            }
         lastAction.Action="";
         lastAction.Author="";
         lastAction.Chained="";
+        lastAction.Cuarto="";
         sendToStorage()
     })
-
 
     // POINTS
     $("#ft-made").click(function(){
         lastAction.Action="ftM"
+        lastAction.Cuarto=cuarto
         if (lastAction.Author =="B"){
             updateScore("B",1)
         }else{
             updateScore("A",1)
-            saveToDB()
+            saveToDB(1)
         }
         sendToStorage()
     })
     $("#ft-miss").click(function(){
         lastAction.Action="ftA"
+        lastAction.Cuarto=cuarto
         sendToStorage()
-        saveToDB()
+        saveToDB(1)
     })
    
     $("#2pt-made").click(function(){
         lastAction.Action="fgM"
+        lastAction.Cuarto=cuarto
         if (lastAction.Author =="B"){
             updateScore("B",2)
         }else{
             updateScore("A",2)
-            saveToDB()
+            saveToDB(1)
         }
         sendToStorage()
     })
     $("#2pt-miss").click(function(){
         lastAction.Action="fgA"
+        lastAction.Cuarto=cuarto
         sendToStorage()
-        saveToDB()
+        saveToDB(1)
     })
    
     $("#3pt-made").click(function(){
         lastAction.Action="thrM"
+        lastAction.Cuarto=cuarto
         if (lastAction.Author =="B"){
             updateScore("B",3)
         }else{
             updateScore("A",3)
-            saveToDB()
+            saveToDB(1)
         }
         sendToStorage()
     })
     $("#3pt-miss").click(function(){
         lastAction.Action="thrA"
+        lastAction.Cuarto=cuarto
         sendToStorage()
-        saveToDB()
+        saveToDB(1)
     })
     
     // OTHER STATS
     $("#reb-def").click(function(){
         lastAction.Action="rDf"
+        lastAction.Cuarto=cuarto
         sendToStorage()
-        saveToDB()  
+        saveToDB(1)  
     })
     $("#reb-off").click(function(){
         lastAction.Action="rOf"
+        lastAction.Cuarto=cuarto
         sendToStorage()
-        saveToDB()  
+        saveToDB(1)  
     })
     $("#steal").click(function(){
         lastAction.Action="St"
+        lastAction.Cuarto=cuarto
         sendToStorage()
-        saveToDB()   
+        saveToDB(1)   
     })
     $("#TO").click(function(){
         lastAction.Action="TO"
+        lastAction.Cuarto=cuarto
         sendToStorage()
-        saveToDB()  
+        saveToDB(1)  
     })
     $("#block").click(function(){
         lastAction.Action="Bl"
+        lastAction.Cuarto=cuarto
         sendToStorage()
-        saveToDB() 
+        saveToDB(1) 
     })
     $("#foul").click(function(){
         lastAction.Action="Fo"
+        lastAction.Cuarto=cuarto
         sendToStorage()
-        saveToDB()
+        saveToDB(1)
     })
     $("#assist").click(function(){
         lastAction.Action="As"
+        lastAction.Cuarto=cuarto
         sendToStorage()
-        saveToDB() 
+        saveToDB(1) 
     })
 
     // PLAYERS
@@ -332,77 +364,90 @@ $(document).ready(function(){
         lastAction.Chained=$("#p1").attr("value");
         habilitarBtnAssist(lastAction.Author)
         sendToStorage()
-        saveToDB()
+        saveToDB(1)
     })
     $("#assist-p2").click(function(){
         lastAction.Chained=$("#p2").attr("value");
         habilitarBtnAssist(lastAction.Author)
         sendToStorage()
-        saveToDB()
+        saveToDB(1)
     })
     $("#assist-p3").click(function(){
         lastAction.Chained=$("#p3").attr("value");
         habilitarBtnAssist(lastAction.Author)
         sendToStorage()
+        saveToDB(1)
     })
     $("#assist-p4").click(function(){
         lastAction.Chained=$("#p4").attr("value");
         habilitarBtnAssist(lastAction.Author)
         sendToStorage()
+        saveToDB(1)
     })
     $("#assist-p5").click(function(){
         lastAction.Chained=$("#p5").attr("value");
         habilitarBtnAssist(lastAction.Author)
         sendToStorage()
+        saveToDB(1)
     })
     $("#assist-p6").click(function(){
         lastAction.Chained=$("#p6").attr("value");
         habilitarBtnAssist(lastAction.Author)
         sendToStorage()
+        saveToDB(1)
     })
     $("#assist-p7").click(function(){
         lastAction.Chained=$("#p7").attr("value");
         habilitarBtnAssist(lastAction.Author)
         sendToStorage()
+        saveToDB(1)
     })
     $("#assist-p8").click(function(){
         lastAction.Chained=$("#p0").attr("value");
         habilitarBtnAssist(lastAction.Author)
         sendToStorage()
+        saveToDB(1)
     })
     $("#assist-p9").click(function(){
         lastAction.Chained=$("#p9").attr("value");
         habilitarBtnAssist(lastAction.Author)
         sendToStorage()
+        saveToDB(1)
     })
     $("#assist-p10").click(function(){
         lastAction.Chained=$("#p10").attr("value");
         habilitarBtnAssist(lastAction.Author)
         sendToStorage()
+        saveToDB(1)
     })
     $("#assist-p11").click(function(){
         lastAction.Chained=$("#p11").attr("value");
         habilitarBtnAssist(lastAction.Author)
         sendToStorage()
+        saveToDB(1)
     })
     $("#assist-p12").click(function(){
         lastAction.Chained=$("#p12").attr("value");
         habilitarBtnAssist(lastAction.Author)
         sendToStorage()
+        saveToDB(1)
     })
     $("#assist-p13").click(function(){
         lastAction.Chained=$("#p13").attr("value");
         habilitarBtnAssist(lastAction.Author)
         sendToStorage()
+        saveToDB(1)
     })
     $("#assist-p14").click(function(){
         lastAction.Chained=$("#p14").attr("value");
         habilitarBtnAssist(lastAction.Author)
         sendToStorage()
+        saveToDB(1)
     })
     $("#assist-p15").click(function(){
         lastAction.Chained=$("#p15").attr("value");
         habilitarBtnAssist(lastAction.Author)
         sendToStorage()
+        saveToDB(1)
   })
 });
