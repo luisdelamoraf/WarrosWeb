@@ -76,21 +76,24 @@ function sendToStorage(){
     localStorage.setItem("Author", lastAction.Author);
     localStorage.setItem("Chained", lastAction.Chained);
     localStorage.setItem("Cuarto", lastAction.Cuarto);
+    lastAction.Author ="";
+    lastAction.Action ="";
+    lastAction.Chained ="";
+    lastAction.Cuarto ="";
 }
 function saveToDB(x){
-    if(lastAction.Action == "ftM" ||lastAction.Action == "fgM" ||lastAction.Action == "thrM" ){
-        matchData.collection("jugadores").doc(lastAction.Author).update({
-            [`${lastAction.Cuarto}.${lastAction.Action.replace("M","A")}`]: firebase.firestore.FieldValue.increment(x)
+    if(localStorage.Action == "ftM" ||localStorage.Action == "fgM" ||localStorage.Action == "thrM" ){
+        matchData.collection("jugadores").doc(localStorage.Author).update({
+            [`${localStorage.Cuarto}.${localStorage.Action.replace("M","A")}`]: firebase.firestore.FieldValue.increment(x)
         })
     }
-    if(lastAction.Chained != ""){
-        console.log(lastAction.Chained);
-        matchData.collection("jugadores").doc(lastAction.Chained).update({
-            [`${lastAction.Cuarto}.As`]: firebase.firestore.FieldValue.increment(x)
+    if(localStorage.Chained != ""){
+        matchData.collection("jugadores").doc(localStorage.Chained).update({
+            [`${localStorage.Cuarto}.As`]: firebase.firestore.FieldValue.increment(x)
         })
     }
-    matchData.collection("jugadores").doc(lastAction.Author).update({
-        [`${lastAction.Cuarto}.${lastAction.Action}`]: firebase.firestore.FieldValue.increment(x)
+    matchData.collection("jugadores").doc(localStorage.Author).update({
+        [`${localStorage.Cuarto}.${localStorage.Action}`]: firebase.firestore.FieldValue.increment(x)
     })
 }
 function clearLocalStorage(){
@@ -159,6 +162,8 @@ $(document).ready(function(){
     })
     $(".btn_nadie").click(function(){
         habilitarBtnAssist(lastAction.Author)
+        sendToStorage()
+        saveToDB(1)
         $(".assist-table").hide();
         $(".players-table").show();
     })
@@ -182,9 +187,8 @@ $(document).ready(function(){
         lastAction.Cuarto ="";
     })
     $("#undo-action").click(function(){
-        console.log(lastAction);
         let puntos
-        switch (lastAction.Action){
+        switch (localStorage.Action){
             case "ftM":
                 puntos =-1;
                 break;
@@ -198,7 +202,7 @@ $(document).ready(function(){
                 puntos =0;
                 break;
         }
-        if(lastAction.Author=="B"){
+        if(localStorage.Author=="B"){
             updateScore("B", puntos)
         }else{
             updateScore("A", puntos)
@@ -237,9 +241,7 @@ $(document).ready(function(){
             updateScore("B",2)
         }else{
             updateScore("A",2)
-            saveToDB(1)
         }
-        sendToStorage()
     })
     $("#2pt-miss").click(function(){
         lastAction.Action="fgA"
@@ -255,9 +257,7 @@ $(document).ready(function(){
             updateScore("B",3)
         }else{
             updateScore("A",3)
-            saveToDB(1)
         }
-        sendToStorage()
     })
     $("#3pt-miss").click(function(){
         lastAction.Action="thrA"
