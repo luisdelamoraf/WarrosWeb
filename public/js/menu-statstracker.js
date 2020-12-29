@@ -19,7 +19,7 @@ let anadirLiga = document.querySelector("#btn-anadir-liga");
 let nombreLiga = document.querySelector("#nombre-nueva-liga");
 
 
-// Inicializar firebase/firestore
+//Inicializar firebase/firestore
 const firebaseConfig = {
     apiKey: "AIzaSyBjocp24M1HVFlS43U1UlpcydpqqKfldN4",
     authDomain: "warrosweb.firebaseapp.com",
@@ -35,8 +35,7 @@ firebase.initializeApp(firebaseConfig)
 var firestore = firebase.firestore()
 // ./Inicializar firebase/firestore
 
-
-// Funciones
+//Funciones
 function refrescarEquipos(){
     $("#partidoEquipo").html(``)
     firestore.collection("equipos").get().then(function(querySnapshot) {
@@ -159,8 +158,13 @@ $("#go-to-match").click(function(){
                     })
             }
         })  
+        
         window.location.replace("https://warrosweb.web.app/statstracker.html");
     }
+})
+
+$("#btn-ver-partidos").click(function(){
+    window.location.replace("https://warrosweb.web.app/lista-partidos.html");
 })
 
 $("#btn-crear-nuevo-equipo").click(function(){
@@ -183,6 +187,10 @@ $("#btn-crear-nuevo-equipo").click(function(){
 $("#btn-editar-equipo").click(function(){
     cargarEquipoEditar()
 });
+
+$("#editarEquipo").change(function(){
+    cargarEquipoEditar()
+})
 
 $("#btn-agregar-jugador").click(function(){
     if(editarNombre.value && editarNumero.value){

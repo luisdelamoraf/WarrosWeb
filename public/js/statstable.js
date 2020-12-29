@@ -41,8 +41,21 @@ team_Bl=0
 team_TO=0
 team_Fo=0
 
-
-
+//Marcador
+matchData.get().then(function(doc) {
+    if (doc.exists) {
+        $("#team-a").text(doc.data().Equipo.split("_")[0])
+        $("#team-b").text(doc.data().Rival)
+    } else {
+        console.log("No such match!");
+    }
+}).catch(function(error) {
+    console.log("Error getting document:", error);
+});
+matchData.onSnapshot(function(doc) {
+    $("#score-a").text(doc.data().score)
+    $("#score-b").text(doc.data().scoreRival)
+});
 
 // Creación arrayPartido
 matchData.collection("jugadores").get().then(function(querySnapshot) {

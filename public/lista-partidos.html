@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>WarrosGdl</title>
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <!-- Icon -->
+    <link href="img/logos/warros_icon_180x180.png" rel="apple-touch-icon" />
+    <link rel="shortcut icon" href="img/logos/warros_blue_180x180.png" type="image/x-icon" />
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,  maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/89ac1f6cc6.js" crossorigin="anonymous"></script>
+
+
+    <!-- lista-partidos CSS -->
+    <link rel="stylesheet" href="css/lista-partidos.css">
+    
+    <!-- Default CSS -->
+    <link rel="stylesheet" href="css/default.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-sm navbar-dark warros-blue-gradient">
+        <a class="navbar-brand" href="menu-statstracker.html"> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i></i> </a>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link">Match Display 1.0 <span class="sr-only"></span></a>
+                </li>
+            </ul>
+    </nav>
+    <!-- ./Navbar -->
+
+    <!-- Filter bar -->
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="selector-equipo">Equipo</label>
+                        </div>
+                        <select class="custom-select" id="selector-equipo">
+                            <option selected>Todos</option>
+                        </select>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="selector-liga">Liga</label>
+                        </div>
+                        <select class="custom-select" id="selector-liga">
+                            <option selected>Todas</option>
+                        </select>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-outline-primary my-2 my-sm-0" id="btn-filtrar"><i class="fa fa-search" aria-hidden="true"></i></button>
+                </li>
+            </ul>
+    </nav>
+    <table id="tabla-partidos" class=" table table-striped table-hover tabla-partidos">
+        <tr>
+            <th colspan="3">partido</th>
+            <th>marcador</th>
+            <th>fecha</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </table>
+
+    <!-- Modal Confirmar Eliminar-->
+    <div class="modal fade" id="modal-eliminar-partido" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">¿Seguro que deseas eliminar este partido?</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                <div class="modal-body">
+                    Al eliminar este partido se borrarán todos los datos asociados a él y ya no serán considerados en ninguna estadística.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" id="btn-confirmar-eliminar" class="btn btn-danger" data-dismiss="modal">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+
+    <!--JavaScript -->
+    <script src="js/lista-partidos.js"></script>
+
+
+</body>
+
+</html>

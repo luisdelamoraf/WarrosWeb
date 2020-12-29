@@ -1,0 +1,37 @@
+.nav-item{
+    margin: 10px;
+}
+.tabla-partidos{
+    width: 100%;
+    text-align: center;
+}
+.w{
+    color: green;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    border-color: green;
+}
+.l{
+    color:red;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    border-color: red;
+}
+.d{
+    color: gray;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    border-color: gray;
+}
+
+.result{
+    width: 35px;
+    height: 35px;
+}
+.modal-body{
+    font-size: large;
+    color: gray;
+}
