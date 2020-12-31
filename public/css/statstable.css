@@ -1,22 +1,28 @@
-table, th, td{
-    font-size: large;
-    border: 2px solid black;
-}
-th{
-    background-color: rgb(211, 211, 211);
-}
-.th-estadisticas{
-    text-align: center;
-    width: 4.5%;
-}
-.col-numero{
-    width: 20px;
+
+/* .ag-theme-alpine {
+    --ag-row-hover-color: rgb(222, 230, 240);
+} */
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
 }
 
-.col-nombre{
-    width: 150px;
-}
-#th-totales{
-    width: 170px;
+html {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0;
+    overflow: auto;
 }
 
+body {
+    overflow: auto;
+}
+
+#myGrid{
+    height: 73%;
+}

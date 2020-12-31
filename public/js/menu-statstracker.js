@@ -144,16 +144,16 @@ $("#go-to-match").click(function(){
             if(this.checked){
                     docPartido.collection("jugadores").doc(this.value).set({
                         "Q1":{
-                            "fgM":0,"fgA":0,"thrM":0,"thrA":0,"ftM":0,"ftA":0,"rDf":0,"rOf":0,"As":0,"St":0,"Bl":0,"Fo":0,"TO":0
+                            "twoM":0,"twoA":0,"thrM":0,"thrA":0,"ftM":0,"ftA":0,"rDf":0,"rOf":0,"As":0,"St":0,"Bl":0,"Fo":0,"TO":0
                         },
                         "Q2":{
-                            "fgM":0,"fgA":0,"thrM":0,"thrA":0,"ftM":0,"ftA":0,"rDf":0,"rOf":0,"As":0,"St":0,"Bl":0,"Fo":0,"TO":0
+                            "twoM":0,"twoA":0,"thrM":0,"thrA":0,"ftM":0,"ftA":0,"rDf":0,"rOf":0,"As":0,"St":0,"Bl":0,"Fo":0,"TO":0
                         },
                         "Q3":{
-                            "fgM":0,"fgA":0,"thrM":0,"thrA":0,"ftM":0,"ftA":0,"rDf":0,"rOf":0,"As":0,"St":0,"Bl":0,"Fo":0,"TO":0
+                            "twoM":0,"twoA":0,"thrM":0,"thrA":0,"ftM":0,"ftA":0,"rDf":0,"rOf":0,"As":0,"St":0,"Bl":0,"Fo":0,"TO":0
                         },
                         "Q4":{
-                            "fgM":0,"fgA":0,"thrM":0,"thrA":0,"ftM":0,"ftA":0,"rDf":0,"rOf":0,"As":0,"St":0,"Bl":0,"Fo":0,"TO":0
+                            "twoM":0,"twoA":0,"thrM":0,"thrA":0,"ftM":0,"ftA":0,"rDf":0,"rOf":0,"As":0,"St":0,"Bl":0,"Fo":0,"TO":0
                         }
                     })
             }
@@ -241,12 +241,12 @@ $("#btn-anadir-liga").click(function(){
             nombre: nombreLiga.value 
         }).then(function() {
             refrescarLigas()
-            alert("Liga creada correctamente");
+            alert("Torneo creado correctamente");
         })
         .catch(function(error) {
             console.error("Error writing document: ", error);
         });
     }else{
-        alert("Nombre de liga vacio")
+        alert("Nombre del torneo vacio")
     }
 });

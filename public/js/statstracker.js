@@ -82,7 +82,7 @@ function sendToStorage(){
     lastAction.Cuarto ="";
 }
 function saveToDB(x){
-    if(localStorage.Action == "ftM" ||localStorage.Action == "fgM" ||localStorage.Action == "thrM" ){
+    if(localStorage.Action == "ftM" ||localStorage.Action == "twoM" ||localStorage.Action == "thrM" ){
         matchData.collection("jugadores").doc(localStorage.Author).update({
             [`${localStorage.Cuarto}.${localStorage.Action.replace("M","A")}`]: firebase.firestore.FieldValue.increment(x)
         })
@@ -192,7 +192,7 @@ $(document).ready(function(){
             case "ftM":
                 puntos =-1;
                 break;
-            case "fgM":
+            case "twoM":
                 puntos =-2;
                 break;
             case "thrM":
@@ -235,7 +235,7 @@ $(document).ready(function(){
     })
    
     $("#2pt-made").click(function(){
-        lastAction.Action="fgM"
+        lastAction.Action="twoM"
         lastAction.Cuarto=cuarto
         if (lastAction.Author =="B"){
             updateScore("B",2)
@@ -244,7 +244,7 @@ $(document).ready(function(){
         }
     })
     $("#2pt-miss").click(function(){
-        lastAction.Action="fgA"
+        lastAction.Action="twoA"
         lastAction.Cuarto=cuarto
         sendToStorage()
         saveToDB(1)

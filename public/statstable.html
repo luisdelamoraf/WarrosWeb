@@ -34,17 +34,21 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-sm navbar-dark warros-blue-gradient">
-        <a class="navbar-brand" href="statstracker.html"> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i></i> </a>
+        <a class="navbar-brand" href="menu-statstracker.html"> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i></i> </a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
             aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="statstracker.html">STATS TRACKER 1.0 <span class="sr-only"></span></a>
+                </li>
                 <li class="nav-item active">
-                    <a class="nav-link">STATS TABLE 1.0 <span class="sr-only"></span></a>
+                    <a class="nav-link" href="statstable.html">STATS TABLE 1.0 <span class="sr-only"></span></a>
                 </li>
             </ul>
+            <button id="btn-save" type="button" class="btn btn-warning"><i style="color:white;" class="fas fa-save" aria-hidden="true"></i></button>
         </div>
     </nav>
     <!-- ./Navbar -->
@@ -75,74 +79,31 @@
         </div>
     </div>
     <div class="d-flex flex-row justify-content-center">
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <div id="btn-periodo" class="btn-group btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-secondary active">
-                <input type="radio" name="options" id="final" autocomplete="off"> Final
+                <input type="radio" name="options" id="final" autocomplete="off" value="0"> Final
               </label>
             <label class="btn btn-secondary">
-              <input type="radio" name="options" id="q1" autocomplete="off"> Q1
+              <input type="radio" name="options" id="q1" autocomplete="off" value="1"> Q1
             </label>
             <label class="btn btn-secondary">
-              <input type="radio" name="options" id="q2" autocomplete="off"> Q2
+              <input type="radio" name="options" id="q2" autocomplete="off" value="2"> Q2
             </label>
             <label class="btn btn-secondary">
-              <input type="radio" name="options" id="q3" autocomplete="off"> Q3
+              <input type="radio" name="options" id="q3" autocomplete="off" value="3"> Q3
             </label>
             <label class="btn btn-secondary">
-                <input type="radio" name="options" id="q4" autocomplete="off"> Q4
+                <input type="radio" name="options" id="q4" autocomplete="off" value="4"> Q4
             </label>
             <label class="btn btn-secondary">
-                <input type="radio" name="options" id="ot" autocomplete="off"> OT
+                <input type="radio" name="options" id="ot" autocomplete="off" value="5"> OT
             </label>
         </div>
     </div>
     <br>
-    <div id ="insert-table" class="d-flex justify-content-center">
-        <!-- <table id="tabla-estadisticas">
-            <div>
-                <tr>
-                    <th>No.</th>
-                    <th>Jugador</th>
-                    <th class="th-estadisticas">2pM</th>
-                    <th class="th-estadisticas">2pA</th>
-                    <th class="th-estadisticas">3pM</th>
-                    <th class="th-estadisticas">3pA</th>
-                    <th class="th-estadisticas">ftM</th>
-                    <th class="th-estadisticas">ftA</th>
-                    <th class="th-estadisticas">RDf</th>
-                    <th class="th-estadisticas">ROf</th>
-                    <th class="th-estadisticas">Ast</th>
-                    <th class="th-estadisticas">Stl</th>
-                    <th class="th-estadisticas">Bl</th>
-                    <th class="th-estadisticas">TO</th>
-                    <th class="th-estadisticas">Fo</th>
-                </tr>
-            </div>
-        </table> -->
-    </div>
 
-    <!-- <div class="d-flex justify-content-center">
-        <table id="tablaSumas">
-            <tr>
-                <th colspan="2" id="th-totales">
-                    Totales
-                </th>
-                <th id="suma-fgM" class="th-estadisticas">0</th>
-                <th id="suma-fgA" class="th-estadisticas">0</th>
-                <th id="suma-thrM" class="th-estadisticas">0</th>
-                <th id="suma-thrA" class="th-estadisticas">0</th>
-                <th id="suma-ftM" class="th-estadisticas">0</th>
-                <th id="suma-ftA" class="th-estadisticas">0</th>
-                <th id="suma-rDf" class="th-estadisticas">0</th>
-                <th id="suma-rOf" class="th-estadisticas">0</th>
-                <th id="suma-As" class="th-estadisticas">0</th>
-                <th id="suma-St" class="th-estadisticas">0</th>
-                <th id="suma-Bl" class="th-estadisticas">0</th>
-                <th id="suma-TO" class="th-estadisticas">0</th>
-                <th id="suma-Fo" class="th-estadisticas">0</th>
-            </tr>
-        </table>
-    </div> -->
+    <div id="myGrid" class="ag-theme-alpine"></div>
+
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -158,7 +119,9 @@
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
     <!--JavaScript -->
+    <script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.js"></script>
     <script src="js/statstable.js"></script>
+
 </body>
 
 </html>
