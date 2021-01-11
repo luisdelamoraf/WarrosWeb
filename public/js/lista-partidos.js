@@ -28,10 +28,10 @@ function filtrar(){
                 firestore.collection("ligas").doc(doc.id).collection("partidos").get().then(function(querySnapshot){
                     querySnapshot.forEach(function(partido){
                         let result
-                        if(partido.data().score > partido.data().scoreRival){
+                        if(partido.data().Score["Final"] > partido.data().ScoreRival["Final"]){
                             result = "w"
                         } else{
-                            if(partido.data().score < partido.data().scoreRival){
+                            if(partido.data().Score["Final"] < partido.data().ScoreRival["Final"]){
                                 result = "l"
                             }else{
                                 result = "d"
@@ -42,7 +42,7 @@ function filtrar(){
                                 <td>${partido.data().Equipo.split("_")[0]}</td>
                                 <td class="vs-cell">vs</td>
                                 <td>${partido.data().Rival}</td>
-                                <td>${partido.data().score} - ${partido.data().scoreRival}</td>
+                                <td>${partido.data().Score["Final"]} - ${partido.data().ScoreRival["Final"]}</td>
                                 <td>${partido.data().Fecha}</td>
                                 <td>
                                     <div>
@@ -68,10 +68,10 @@ function filtrar(){
                     firestore.collection("ligas").doc(doc.id).collection("partidos").where("Equipo", "==", equipo.value).get().then(function(querySnapshot){
                         querySnapshot.forEach(function(partido){
                             let result
-                            if(partido.data().score > partido.data().scoreRival){
+                            if(partido.data().Score["Final"] > partido.data().ScoreRival["Final"]){
                                 result = "w"
                             } else{
-                                if(partido.data().score < partido.data().scoreRival){
+                                if(partido.data().Score["Final"] < partido.data().ScoreRival["Final"]){
                                     result = "l"
                                 }else{
                                     result = "d"
@@ -82,7 +82,7 @@ function filtrar(){
                                     <td>${partido.data().Equipo.split("_")[0]}</td>
                                     <td class="vs-cell">vs</td>
                                     <td>${partido.data().Rival}</td>
-                                    <td>${partido.data().score} - ${partido.data().scoreRival}</td>
+                                    <td>${partido.data().Score["Final"]} - ${partido.data().ScoreRival["Final"]}</td>
                                     <td>${partido.data().Fecha}</td>
                                     <td>
                                         <div>
@@ -106,10 +106,10 @@ function filtrar(){
                 firestore.collection("ligas").doc(liga.value).collection("partidos").get().then(function(querySnapshot){
                     querySnapshot.forEach(function(partido){
                         let result
-                        if(partido.data().score > partido.data().scoreRival){
+                        if(partido.data().Score["Final"] > partido.data().ScoreRival["Final"]){
                             result = "w"
                         } else{
-                            if(partido.data().score < partido.data().scoreRival){
+                            if(partido.data().Score["Final"] < partido.data().ScoreRival["Final"]){
                                 result = "l"
                             }else{
                                 result = "d"
@@ -120,7 +120,7 @@ function filtrar(){
                                 <td>${partido.data().Equipo.split("_")[0]}</td>
                                 <td class="vs-cell">vs</td>
                                 <td>${partido.data().Rival}</td>
-                                <td>${partido.data().score} - ${partido.data().scoreRival}</td>
+                                <td>${partido.data().Score["Final"]} - ${partido.data().ScoreRival["Final"]}</td>
                                 <td>${partido.data().Fecha}</td>
                                 <td>
                                     <div>
@@ -140,22 +140,23 @@ function filtrar(){
             } else {
                 firestore.collection("ligas").doc(liga.value).collection("partidos").where("Equipo", "==", equipo.value).get().then(function(querySnapshot){
                     querySnapshot.forEach(function(partido){
+
                         let result
-                        if(partido.data().score > partido.data().scoreRival){
+                        if(partido.data().Score["Final"] > partido.data().ScoreRival["Final"]){
                             result = "w"
                         } else{
-                            if(partido.data().score < partido.data().scoreRival){
+                            if(partido.data().Score["Final"] < partido.data().ScoreRival["Final"]){
                                 result = "l"
                             }else{
                                 result = "d"
                             }
-                        }
+                        }                      
                         $("#tabla-partidos").append(`
                             <tr>
                                 <td>${partido.data().Equipo.split("_")[0]}</td>
                                 <td class="vs-cell">vs</td>
                                 <td>${partido.data().Rival}</td>
-                                <td>${partido.data().score} - ${partido.data().scoreRival}</td>
+                                <td>${partido.data().Score["Final"]} - ${partido.data().ScoreRival["Final"]}</td>
                                 <td>${partido.data().Fecha}</td>
                                 <td>
                                     <div>

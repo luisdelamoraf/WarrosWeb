@@ -21,53 +21,21 @@ let partido
 let cuarto = "Q1"
 let nombreJugador
 
-
-// Load match data
-matchData.get().then(function(doc) {
-    if (doc.exists) {
-        $("#team-a").text(doc.data().Equipo.split("_")[0])
-        $("#team-b").text(doc.data().Rival)
-        matchData.collection("jugadores").get().then(function(querySnapshot) {
-            i=-1
-            cont=1
-            querySnapshot.forEach(function() {
-                i++
-                firestore.doc(`equipos/${doc.data().Equipo}/jugadores/${querySnapshot.docs[i].id}`).get().then(function(x){
-                    $(`#p${cont}`).text(x.data().nombre);             
-                    $(`#p${cont}`).attr("value", x.id);
-                    $(`#p${cont}`).attr('disabled', false);
-                    $(`#assist-p${cont}`).text(x.data().nombre);             
-                    $(`#assist-p${cont}`).attr("value", x.id);
-                    $(`#assist-p${cont}`).attr('disabled', false);
-                    assist-p1
-                    cont++
-                }).catch(function(error) {
-                    console.log("Error getting document:", error);
-                });
-            });
-        });
-        partidoInfo = doc.data() 
-    } else {
-        console.log("No such match!");
-    }
-}).catch(function(error) {
-    console.log("Error getting document:", error);
-});
-matchData.onSnapshot(function(doc) {
-    $("#score-a").text(doc.data().score)
-    $("#score-b").text(doc.data().scoreRival)
-});
-// ./load match data
-
 // Declared Functions
-function updateScore(equipo, puntos){
+function updateScore(equipo, puntos, cuarto){
     if(equipo=="A"){
         matchData.update({
-            score:firebase.firestore.FieldValue.increment(puntos)
+            [`Score.${cuarto}`]:firebase.firestore.FieldValue.increment(puntos)
+        })
+        matchData.update({
+            "Score.Final":firebase.firestore.FieldValue.increment(puntos)
         })
     }else{
         matchData.update({
-            scoreRival:firebase.firestore.FieldValue.increment(puntos)
+            [`ScoreRival.${cuarto}`]:firebase.firestore.FieldValue.increment(puntos)
+        })
+        matchData.update({
+            "ScoreRival.Final":firebase.firestore.FieldValue.increment(puntos)
         })
     }
 }
@@ -108,6 +76,42 @@ function habilitarBtnAssist(id){
 }
 // ./Declared Functions
 
+// Load match data
+matchData.get().then(function(doc) {
+    if (doc.exists) {
+        $("#team-a").text(doc.data().Equipo.split("_")[0])
+        $("#team-b").text(doc.data().Rival)
+        matchData.collection("jugadores").get().then(function(querySnapshot) {
+            i=-1
+            cont=1
+            querySnapshot.forEach(function() {
+                i++
+                firestore.doc(`equipos/${doc.data().Equipo}/jugadores/${querySnapshot.docs[i].id}`).get().then(function(x){
+                    $(`#p${cont}`).text(x.data().nombre);             
+                    $(`#p${cont}`).attr("value", x.id);
+                    $(`#p${cont}`).attr('disabled', false);
+                    $(`#assist-p${cont}`).text(x.data().nombre);             
+                    $(`#assist-p${cont}`).attr("value", x.id);
+                    $(`#assist-p${cont}`).attr('disabled', false);
+                    assist-p1
+                    cont++
+                }).catch(function(error) {
+                    console.log("Error getting document:", error);
+                });
+            });
+        });
+        partidoInfo = doc.data() 
+    } else {
+        console.log("No such match!");
+    }
+}).catch(function(error) {
+    console.log("Error getting document:", error);
+});
+matchData.onSnapshot(function(doc) {
+    $("#score-a").text(doc.data().Score["Final"])
+    $("#score-b").text(doc.data().ScoreRival["Final"])
+});
+// ./load match data
 
 $(document).ready(function(){
 
@@ -154,7 +158,6 @@ $(document).ready(function(){
             $(".stats-tables").hide();
             $(".assist-table").show(); 
         }
-
     })
     $(".btn_assist_player").click(function(){
         $(".assist-table").hide();
@@ -168,7 +171,6 @@ $(document).ready(function(){
         $(".players-table").show();
     })
     $(".btn_undoRival").click(function(){
-
         $(".stats-tables").hide();
         $(".players-table").show();
     })
@@ -188,6 +190,7 @@ $(document).ready(function(){
     })
     $("#undo-action").click(function(){
         let puntos
+        let periodo = localStorage.Cuarto
         switch (localStorage.Action){
             case "ftM":
                 puntos =-1;
@@ -203,9 +206,9 @@ $(document).ready(function(){
                 break;
         }
         if(localStorage.Author=="B"){
-            updateScore("B", puntos)
+            updateScore("B", puntos, periodo)
         }else{
-            updateScore("A", puntos)
+            updateScore("A", puntos, periodo)
             saveToDB(-1)
             }
         lastAction.Action="";
@@ -220,12 +223,13 @@ $(document).ready(function(){
         lastAction.Action="ftM"
         lastAction.Cuarto=cuarto
         if (lastAction.Author =="B"){
-            updateScore("B",1)
+            updateScore("B",1, lastAction.Cuarto)
+            sendToStorage()
         }else{
-            updateScore("A",1)
+            updateScore("A",1, lastAction.Cuarto)
+            sendToStorage()
             saveToDB(1)
         }
-        sendToStorage()
     })
     $("#ft-miss").click(function(){
         lastAction.Action="ftA"
@@ -238,9 +242,10 @@ $(document).ready(function(){
         lastAction.Action="twoM"
         lastAction.Cuarto=cuarto
         if (lastAction.Author =="B"){
-            updateScore("B",2)
+            updateScore("B",2, lastAction.Cuarto)
+            sendToStorage()
         }else{
-            updateScore("A",2)
+            updateScore("A",2, lastAction.Cuarto)
         }
     })
     $("#2pt-miss").click(function(){
@@ -254,9 +259,10 @@ $(document).ready(function(){
         lastAction.Action="thrM"
         lastAction.Cuarto=cuarto
         if (lastAction.Author =="B"){
-            updateScore("B",3)
+            updateScore("B",3, lastAction.Cuarto)
+            sendToStorage()
         }else{
-            updateScore("A",3)
+            updateScore("A",3, lastAction.Cuarto)
         }
     })
     $("#3pt-miss").click(function(){
@@ -321,42 +327,55 @@ $(document).ready(function(){
     })
     $("#p3").click(function(){
         lastAction.Author=$("#p3").attr("value");
+        $("#assist-p3").attr('disabled', true);
     })
     $("#p4").click(function(){
         lastAction.Author=$("#p4").attr("value");
+        $("#assist-p4").attr('disabled', true);
     })
     $("#p5").click(function(){
         lastAction.Author=$("#p5").attr("value");
+        $("#assist-p5").attr('disabled', true);
     })
     $("#p6").click(function(){
         lastAction.Author=$("#p6").attr("value");
+        $("#assist-p6").attr('disabled', true);
     })
     $("#p7").click(function(){
         lastAction.Author=$("#p7").attr("value");
+        $("#assist-p7").attr('disabled', true);
     })
     $("#p8").click(function(){
         lastAction.Author=$("#p8").attr("value");
+        $("#assist-p8").attr('disabled', true);
     })
     $("#p9").click(function(){
         lastAction.Author=$("#p9").attr("value");
+        $("#assist-p9").attr('disabled', true);
     })
     $("#p10").click(function(){
         lastAction.Author=$("#p10").attr("value");
+        $("#assist-p10").attr('disabled', true);
     })
     $("#p11").click(function(){
         lastAction.Author=$("#p11").attr("value");
+        $("#assist-p11").attr('disabled', true);
     })
     $("#p12").click(function(){
         lastAction.Author=$("#p12").attr("value");
+        $("#assist-p12").attr('disabled', true);
     })
     $("#p13").click(function(){
         lastAction.Author=$("#p13").attr("value");
+        $("#assist-p13").attr('disabled', true);
     })
     $("#p14").click(function(){
         lastAction.Author=$("#p14").attr("value");
+        $("#assist-p14").attr('disabled', true);
     })
     $("#p15").click(function(){
         lastAction.Author=$("#p15").attr("value");
+        $("#assist-p15").attr('disabled', true);
     })
 
     // PLAYERS-ASSIST

@@ -44,33 +44,28 @@
     <!-- ./Navbar -->
 
     <!-- Filter bar -->
-    <nav class="navbar navbar-expand-sm navbar-light bg-light">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" for="selector-equipo">Equipo</label>
-                        </div>
-                        <select class="custom-select" id="selector-equipo">
-                            <option selected>Todos</option>
-                        </select>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" for="selector-liga">Liga</label>
-                        </div>
-                        <select class="custom-select" id="selector-liga">
-                            <option selected>Todas</option>
-                        </select>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <button class="btn btn-outline-primary my-2 my-sm-0" id="btn-filtrar"><i class="fa fa-search" aria-hidden="true"></i></button>
-                </li>
-            </ul>
-    </nav>
+    <div class="filter-bar d-flex">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="selector-equipo">Equipo</label>
+            </div>
+            <select class="custom-select" id="selector-equipo">
+                <option selected>Todos</option>
+            </select>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="selector-liga">Liga</label>
+            </div>
+            <select class="custom-select" id="selector-liga">
+                <option selected>Todas</option>
+            </select>
+        </div>
+        <div class="btn">
+            <button class="btn btn-outline-primary id="btn-filtrar"><i class="fa fa-search" aria-hidden="true"></i></button>
+        </div>
+    </div>
+  
     <table id="tabla-partidos" class=" table table-striped table-hover tabla-partidos">
         <tr>
             <th colspan="3">partido</th>

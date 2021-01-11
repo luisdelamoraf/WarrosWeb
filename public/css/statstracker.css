@@ -136,7 +136,12 @@
         color: black !important;
     }
 }
+@media (max-width:540px)  { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ 
+    .nav-link{
+    font-size: 20px;
+    }
 
+}
 
 
 

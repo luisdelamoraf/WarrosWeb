@@ -119,8 +119,8 @@ $("#btn-nuevo-partido").click(function(){
         Equipo: partidoEquipo.value, 
         Rival: partidoRival.value, 
         Fecha: partidoFecha.value,
-        score: 0,
-        scoreRival:0
+        Score: {Final:0, Q1:0, Q2:0, Q3:0, Q4:0},
+        ScoreRival:{Final:0, Q1:0, Q2:0, Q3:0, Q4:0}
     }).then(function(){
         idPartido++
         $('#modal-nuevo-partido').modal('hide');
@@ -128,7 +128,15 @@ $("#btn-nuevo-partido").click(function(){
         let equipo = firestore.collection("equipos").doc(`${partidoEquipo.value}`).collection("jugadores")
         equipo.get().then(function(docs) {
             docs.forEach(function(doc){
-                    $("#equipo-seleccionado").append(`<label><input type="checkbox" id="${doc.id}" value="${doc.id}"> ${doc.data().nombre} ${doc.data().numero}</label><hr>`)
+                    $("#equipo-seleccionado").append(`
+                    <div>
+                        <input class="form-check-input big-checkbox" type="checkbox" id="${doc.id}" value="${doc.id}">
+                        <label class="form-check-label" for="${doc.id}">
+                            &nbsp;&nbsp;&nbsp;&nbsp;${doc.data().numero} &nbsp;&nbsp;&nbsp;&nbsp; ${doc.data().nombre}
+                        </label>
+                    </div>
+                    <hr>
+                    `)
             })
         });
     }).catch(function(error){

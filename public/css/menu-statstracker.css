@@ -24,3 +24,8 @@
 #regresar-agregar{
     display: none;
 }
+#equipo-seleccionado div{
+    margin-left: 50px;
+}
+
+.big-checkbox {width: 20px; height: 20px;}
