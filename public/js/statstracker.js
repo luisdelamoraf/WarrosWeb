@@ -15,7 +15,7 @@ var firestore = firebase.firestore()
 
 localStorage = window.localStorage;
 let lastAction = {"Action":"","Author":"","Chained":"","Cuarto":""}
-let matchData = firestore.doc(`ligas/${localStorage.getItem("Liga")}/partidos/${localStorage.getItem("ID")}`)
+let matchData = firestore.doc(`torneos/${localStorage.getItem("Torneo")}/partidos/${localStorage.getItem("ID")}`)
 let partidoInfo
 let partido
 let cuarto = "Q1"
@@ -227,6 +227,7 @@ $(document).ready(function(){
             sendToStorage()
         }else{
             updateScore("A",1, lastAction.Cuarto)
+            habilitarBtnAssist(lastAction.Author)
             sendToStorage()
             saveToDB(1)
         }
@@ -276,42 +277,49 @@ $(document).ready(function(){
     $("#reb-def").click(function(){
         lastAction.Action="rDf"
         lastAction.Cuarto=cuarto
+        habilitarBtnAssist(lastAction.Author)
         sendToStorage()
         saveToDB(1)  
     })
     $("#reb-off").click(function(){
         lastAction.Action="rOf"
         lastAction.Cuarto=cuarto
+        habilitarBtnAssist(lastAction.Author)
         sendToStorage()
         saveToDB(1)  
     })
     $("#steal").click(function(){
         lastAction.Action="St"
         lastAction.Cuarto=cuarto
+        habilitarBtnAssist(lastAction.Author)
         sendToStorage()
         saveToDB(1)   
     })
     $("#TO").click(function(){
         lastAction.Action="TO"
         lastAction.Cuarto=cuarto
+        habilitarBtnAssist(lastAction.Author)
         sendToStorage()
         saveToDB(1)  
     })
     $("#block").click(function(){
         lastAction.Action="Bl"
         lastAction.Cuarto=cuarto
+        habilitarBtnAssist(lastAction.Author)
         sendToStorage()
         saveToDB(1) 
     })
     $("#foul").click(function(){
         lastAction.Action="Fo"
         lastAction.Cuarto=cuarto
+        habilitarBtnAssist(lastAction.Author)
         sendToStorage()
         saveToDB(1)
     })
     $("#assist").click(function(){
         lastAction.Action="As"
         lastAction.Cuarto=cuarto
+        habilitarBtnAssist(lastAction.Author)
         sendToStorage()
         saveToDB(1) 
     })

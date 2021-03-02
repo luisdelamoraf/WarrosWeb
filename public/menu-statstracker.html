@@ -76,13 +76,13 @@
             </tr>
             <tr>
                 <td>
-                    <button type="button" id="" class="btn btn-primary btn-lg">
+                    <button type="button" id="" class="btn btn-primary btn-lg" onclick="window.location.href='/public/statsviewer.html'">
                         Ver estadísticas
                         <br> <i class="fa fa-chart-line" aria-hidden="true"></i>
                     </button>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal-anadir-liga">
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal-anadir-torneo">
                         Añadir Torneo
                         <br> <i class="fa fa-plus-square" aria-hidden="true"></i>
                     </button>
@@ -103,11 +103,11 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group form">
-                        <label for="Liga">Torneo</label>
+                        <label for="Torneo">Torneo</label>
                         <div class="input-group"></div>
                         <div class= "input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"> <i class="fas fa-basketball-ball"></i></span>
-                            <select class="custom-select" id="partidoLiga">
+                            <select class="custom-select" id="partidoTorneo">
                             </select>
                         </div>
                     </div>
@@ -267,8 +267,8 @@
         </div>
     </div>
 
-    <!-- Modal Añadir Liga -->
-    <div class="modal fade" id="modal-anadir-liga" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <!-- Modal Añadir torneo -->
+    <div class="modal fade" id="modal-anadir-torneo" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -284,13 +284,13 @@
                         <div class= "input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"> <i class="fas fa-basketball-ball"></i></span>
                         </div>
-                    <input type="text" name="Nombre" id="nombre-nueva-liga" class="form-control" placeholder="Nombre del torneo" aria-describedby="helpId">
+                    <input type="text" name="Nombre" id="nombre-nueva-torneo" class="form-control" placeholder="Nombre del torneo" aria-describedby="helpId">
                     </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" id="btn-anadir-liga" class="btn btn-primary" data-dismiss="modal">Añadir</button>
+                    <button type="button" id="btn-anadir-torneo" class="btn btn-primary" data-dismiss="modal">Añadir</button>
                 </div>
             </div>
         </div>

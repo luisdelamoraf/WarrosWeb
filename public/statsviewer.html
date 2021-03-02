@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>WarrosGdl</title>
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <!-- Icon -->
+    <link href="img/logos/warros_icon_180x180.png" rel="apple-touch-icon" />
+    <link rel="shortcut icon" href="img/logos/warros_blue_180x180.png" type="image/x-icon" />
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,  maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/89ac1f6cc6.js" crossorigin="anonymous"></script>
+
+
+    <!-- lista-partidos CSS -->
+    <link rel="stylesheet" href="css/statsviewer.css">
+
+    <!-- Default CSS -->
+    <link rel="stylesheet" href="css/default.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-sm navbar-dark warros-blue-gradient">
+        <a class="navbar-brand" href="menu-statstracker.html"> <i class="fa fa-arrow-circle-left"
+                aria-hidden="true"></i></i> </a>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link">Stats Viewer 1.0 <span class="sr-only"></span></a>
+            </li>
+        </ul>
+    </nav>
+    <!-- ./Navbar -->
+
+    <!-- Filter bar -->
+    <div class="filter-bar d-flex">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="selector-equipo">Equipo</label>
+            </div>
+            <select class="custom-select" id="selector-equipo">
+            </select>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="selector-torneo">Torneo</label>
+            </div>
+            <select class="custom-select" id="selector-torneo">
+            </select>
+        </div>
+        <div class="btn">
+            <button class="btn btn-outline-primary" id="btn-filtrar"><i class="fa fa-search"
+                    aria-hidden="true"></i></button>
+        </div>
+    </div>
+
+    <div id="display-team">
+        <div class="team-bar d-flex">
+            <div id="team-info" class="d-flex mr-auto align-self-center">
+                <span id="team-logo" class="d-flex align-self-center">
+
+                </span>
+                <div class="d-flex flex-column">
+                    <span id="team-name">
+                        Nombre equipo
+                    </span>
+                    <span id="team-record">
+                        0-0
+                    </span>
+                </div>
+            </div>
+            <div class="d-flex flex-column align-self-center">
+                <span>
+                    PPG
+                </span>
+                <span id="team-ppg">
+                    88.8
+                </span>
+            </div>
+            <div class="text-divider"></div>
+            <div class="d-flex flex-column align-self-center">
+                <span>
+                    RPG
+                </span>
+                <span id="team-rpg">
+                    88.8
+                </span>
+            </div>
+            <div class="text-divider"></div>
+            <div class="d-flex flex-column align-self-center">
+                <span>
+                    APG
+                </span>
+                <span id="team-apg">
+                    88.8
+                </span>
+            </div>
+            <div class="text-divider"></div>
+            <div class="d-flex flex-column align-self-center">
+                <span>
+                    OPPG
+                </span>
+                <span id="team-oppg">
+                    88.8
+                </span>
+            </div>
+        </div>
+
+        <div class="graphs-tables">
+            <div id="team-totals" class="ag-theme-alpine align-self-center"></div>
+
+            <section class="team-stats">
+                <div class="graphs-div">
+                    <hr>
+                    <h3>Desglose de anotación</h3>
+                    <div id="pieGraph-tipoCanasta" class="d-flex align-self-center">
+                        <div id="chartdiv"></div>
+                    </div>
+
+                    <div id="xyGraph-historialAnotacion">
+                        <div id="chartdiv2" style="height: 600px;"></div>
+                    </div>
+
+                </div>
+
+                <div id="tabla-jugadores-div">
+                    <hr>
+                    <h3>Roster</h3>
+                    <div id="myGrid" class="ag-theme-alpine align-items-center"></div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+
+    <!--JavaScript -->
+    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/material.js"></script>
+    <script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.js"></script>
+    <script src="js/statsviewer.js"></script>
+
+
+</body>
+
+</html>

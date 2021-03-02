@@ -1,7 +1,7 @@
 localStorage = window.localStorage;
-let liga = document.querySelector("#selector-liga");
+let torneo = document.querySelector("#selector-torneo");
 let equipo = document.querySelector("#selector-equipo");
-let currentLiga
+let currentTorneo
 let currentPartido
 
 
@@ -22,10 +22,10 @@ var firestore = firebase.firestore()
 // ./Inicializar firebase/firestore
 
 function filtrar(){
-    if(liga.value == "Todas" && equipo.value == "Todos"){
-        firestore.collection("ligas").get().then(function(querySnapshot){
+    if(torneo.value == "Todos" && equipo.value == "Todos"){
+        firestore.collection("torneos").get().then(function(querySnapshot){
             querySnapshot.forEach(function(doc){
-                firestore.collection("ligas").doc(doc.id).collection("partidos").get().then(function(querySnapshot){
+                firestore.collection("torneos").doc(doc.id).collection("partidos").get().then(function(querySnapshot){
                     querySnapshot.forEach(function(partido){
                         let result
                         if(partido.data().Score["Final"] > partido.data().ScoreRival["Final"]){
@@ -62,10 +62,10 @@ function filtrar(){
             })
         })
     } else {
-        if(liga.value == "Todas" && equipo.value != "Todos"){
-            firestore.collection("ligas").get().then(function(querySnapshot){
+        if(torneo.value == "Todos" && equipo.value != "Todos"){
+            firestore.collection("torneos").get().then(function(querySnapshot){
                 querySnapshot.forEach(function(doc){
-                    firestore.collection("ligas").doc(doc.id).collection("partidos").where("Equipo", "==", equipo.value).get().then(function(querySnapshot){
+                    firestore.collection("torneos").doc(doc.id).collection("partidos").where("Equipo", "==", equipo.value).get().then(function(querySnapshot){
                         querySnapshot.forEach(function(partido){
                             let result
                             if(partido.data().Score["Final"] > partido.data().ScoreRival["Final"]){
@@ -102,8 +102,8 @@ function filtrar(){
                 })
             })
         } else {
-            if(liga.value != "Todas" && equipo.value == "Todos"){
-                firestore.collection("ligas").doc(liga.value).collection("partidos").get().then(function(querySnapshot){
+            if(torneo.value != "Todos" && equipo.value == "Todos"){
+                firestore.collection("torneos").doc(torneo.value).collection("partidos").get().then(function(querySnapshot){
                     querySnapshot.forEach(function(partido){
                         let result
                         if(partido.data().Score["Final"] > partido.data().ScoreRival["Final"]){
@@ -124,8 +124,8 @@ function filtrar(){
                                 <td>${partido.data().Fecha}</td>
                                 <td>
                                     <div>
-                                        <button type="button"  data-toggle="modal" data-target="#modal-eliminar-partido" onclick="datosPartido('${liga.value}','${partido.id}')" class="btn btn-danger btn-sm btn-eliminar-jugador"> <i class="fa fa-trash" aria-hidden="true"></i></button>
-                                        <button type="button" onclick="EditarPartido('${liga.value}','${partido.id}')" class="btn btn-secondary btn-sm btn-editar-jugador"> <i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                        <button type="button"  data-toggle="modal" data-target="#modal-eliminar-partido" onclick="datosPartido('${torneo.value}','${partido.id}')" class="btn btn-danger btn-sm btn-eliminar-jugador"> <i class="fa fa-trash" aria-hidden="true"></i></button>
+                                        <button type="button" onclick="EditarPartido('${torneo.value}','${partido.id}')" class="btn btn-secondary btn-sm btn-editar-jugador"> <i class="fa fa-pencil" aria-hidden="true"></i></button>
                                     </div>
                                 </td>
                                 <td class="align-center">
@@ -138,7 +138,7 @@ function filtrar(){
                     })
                 })
             } else {
-                firestore.collection("ligas").doc(liga.value).collection("partidos").where("Equipo", "==", equipo.value).get().then(function(querySnapshot){
+                firestore.collection("torneos").doc(torneo.value).collection("partidos").where("Equipo", "==", equipo.value).get().then(function(querySnapshot){
                     querySnapshot.forEach(function(partido){
 
                         let result
@@ -160,8 +160,8 @@ function filtrar(){
                                 <td>${partido.data().Fecha}</td>
                                 <td>
                                     <div>
-                                        <button type="button"  data-toggle="modal" data-target="#modal-eliminar-partido" onclick="datosPartido('${liga.value}','${partido.id}')" class="btn btn-danger btn-sm btn-eliminar-jugador"> <i class="fa fa-trash" aria-hidden="true"></i></button>
-                                        <button type="button" onclick="EditarPartido('${liga.value}','${partido.id}')" class="btn btn-secondary btn-sm btn-editar-jugador"> <i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                        <button type="button"  data-toggle="modal" data-target="#modal-eliminar-partido" onclick="datosPartido('${torneo.value}','${partido.id}')" class="btn btn-danger btn-sm btn-eliminar-jugador"> <i class="fa fa-trash" aria-hidden="true"></i></button>
+                                        <button type="button" onclick="EditarPartido('${torneo.value}','${partido.id}')" class="btn btn-secondary btn-sm btn-editar-jugador"> <i class="fa fa-pencil" aria-hidden="true"></i></button>
                                     </div>
                                 </td>
                                 <td class="align-center">
@@ -177,7 +177,6 @@ function filtrar(){
         }
     } 
 }
-
 function limpiarTabla(){
     $("#tabla-partidos").html(`
     <tr>
@@ -190,9 +189,9 @@ function limpiarTabla(){
     `)
 }
 function obtenerFiltros(){
-    firestore.collection("ligas").get().then(function(querySnapshot) {
+    firestore.collection("torneos").get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
-            $("#selector-liga").append(`<option value="${doc.id}">${doc.data().nombre}</option>`)
+            $("#selector-torneo").append(`<option value="${doc.id}">${doc.data().nombre}</option>`)
         });
     });
     firestore.collection("equipos").get().then(function(querySnapshot) {
@@ -201,26 +200,26 @@ function obtenerFiltros(){
         });
     });
 }
-function datosPartido(liga,id){
-    currentLiga = liga
+function datosPartido(torneo,id){
+    currentTorneo = torneo
     currentPartido = id
 }
-function EliminarPartido(liga, id){
-    firestore.collection("ligas").doc(liga).collection("partidos").doc(id).delete().then(function() {
+function EliminarPartido(torneo, id){
+    firestore.collection("torneos").doc(torneo).collection("partidos").doc(id).delete().then(function() {
     }).catch(function(error) {
         console.error("Error removing document: ", error);
     });
     limpiarTabla()
     filtrar()
 }
-function EditarPartido(liga, id){
+function EditarPartido(torneo, id){
     localStorage.setItem("ID", id);
-    localStorage.setItem("Liga", liga);
+    localStorage.setItem("Torneo", torneo);
     window.location.replace("https://warrosweb.web.app/statstable.html");
 }
 function limpiarStorage(){
     localStorage.removeItem("ID");
-    localStorage.removeItem("Liga");
+    localStorage.removeItem("Torneo");
 }
 
 $(document).ready(function(){
@@ -232,7 +231,7 @@ $(document).ready(function(){
         filtrar()
     })
     $("#btn-confirmar-eliminar").click(function(){
-        EliminarPartido(currentLiga, currentPartido)
+        EliminarPartido(currentTorneo, currentPartido)
     })
 })
 

@@ -2,7 +2,7 @@ localStorage = window.localStorage;
 let docPartido
 let jugadores
 // Crear Partido
-let partidoLiga = document.querySelector("#partidoLiga");
+let partidoTorneo = document.querySelector("#partidoTorneo");
 let partidoEquipo = document.querySelector("#partidoEquipo");
 let partidoRival = document.querySelector("#partidoRival");
 let partidoFecha = document.querySelector("#partidoFecha");
@@ -14,9 +14,9 @@ let editarEquipo = document.querySelector("#editarEquipo");
 let editarNombre = document.querySelector("#editar-nombre-jugador");
 let editarNumero = document.querySelector("#editar-numero-jugador");
 let idJugador
-// Añadir liga
-let anadirLiga = document.querySelector("#btn-anadir-liga");
-let nombreLiga = document.querySelector("#nombre-nueva-liga");
+// Añadir Torneo
+let anadirTorneo = document.querySelector("#btn-anadir-torneo");
+let nombreTorneo = document.querySelector("#nombre-nueva-torneo");
 
 
 //Inicializar firebase/firestore
@@ -97,23 +97,23 @@ function regresarAgregar(){
     $("#editar-nombre-jugador").val("")
     $("#editar-numero-jugador").val("")
 }
-function refrescarLigas(){
-    $("#partidoLiga").html(``)
-    firestore.collection("ligas").get().then(function(querySnapshot) {
+function refrescarTorneos(){
+    $("#partidoTorneo").html(``)
+    firestore.collection("torneos").get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
-            $("#partidoLiga").append(`<option value="${doc.id}">${doc.data().nombre}</option>`)
+            $("#partidoTorneo").append(`<option value="${doc.id}">${doc.data().nombre}</option>`)
         });
     });
     
 }
-refrescarLigas()
+refrescarTorneos()
 // ./Funciones
 
 
 $("#btn-nuevo-partido").click(function(){
-    let idPartido = partidoLiga.value.split("_")[0] +"_"+ partidoFecha.value +"_"+ Date.now()
-    docPartido = firestore.doc(`ligas/${partidoLiga.value}/partidos/${idPartido}`)
-    localStorage.setItem("Liga", partidoLiga.value)
+    let idPartido = partidoTorneo.value.split("_")[0] +"_"+ partidoFecha.value +"_"+ Date.now()
+    docPartido = firestore.doc(`torneos/${partidoTorneo.value}/partidos/${idPartido}`)
+    localStorage.setItem("Torneo", partidoTorneo.value)
     localStorage.setItem("ID", idPartido)
     docPartido.set({
         Equipo: partidoEquipo.value, 
@@ -242,13 +242,13 @@ $("#regresar-agregar").click(function(){
     regresarAgregar()
 })
 
-$("#btn-anadir-liga").click(function(){
-    if(nombreLiga.value){
-        var liga = firestore.collection("ligas").doc(nombreLiga.value+"_"+Date.now());
-        liga.set({
-            nombre: nombreLiga.value 
+$("#btn-anadir-torneo").click(function(){
+    if(nombreTorneo.value){
+        var torneo = firestore.collection("torneos").doc(nombreTorneo.value+"_"+Date.now());
+        torneo.set({
+            nombre: nombreTorneo.value 
         }).then(function() {
-            refrescarLigas()
+            refrescarTorneos()
             alert("Torneo creado correctamente");
         })
         .catch(function(error) {

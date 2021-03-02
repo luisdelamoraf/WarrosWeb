@@ -1,0 +1,65 @@
+.filter-bar {
+    margin: 2vh;    
+}
+.filter-bar .input-group{
+    width: 200px;
+    margin: 1vh;
+}
+.team-bar{
+    color: white;
+    padding: 20px;
+    background: rgb(222,145,0);
+    background: linear-gradient(90deg, rgba(222,145,0,1) 0%, rgba(232,187,4,1) 100%);
+}
+#team-name{
+    font-size:xx-large;
+}
+.team-bar div{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.text-divider {
+    width: 1px;
+    border-right: 1px solid rgba(255, 255, 255, 0.4);
+}
+section{
+    padding-left: 1%;
+    padding-right: 1% ;
+}
+.team-stats{
+
+    padding-top: 2%;
+    font-size: medium ;
+}
+
+#myGrid{
+    width: 800px;
+
+}
+
+#team-totals{
+    height: 93px;
+}
+
+#display-team{
+    display: none;
+}
+
+#chartdiv{
+    width: 50vw;
+    height:50vh;
+}
+
+.graphs-tables{
+    background-color: rgb(240, 240, 240);
+    padding: 5%;
+    padding-top: 0%;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+#pieGraph-tipoCanasta{
+    text-align: center;
+}

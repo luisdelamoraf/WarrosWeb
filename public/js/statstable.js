@@ -14,7 +14,7 @@ var firestore = firebase.firestore()
 // ./Inicializar firebase/firestore
 
 localStorage = window.localStorage;
-let matchData = firestore.doc(`ligas/${localStorage.getItem("Liga")}/partidos/${localStorage.getItem("ID")}`)
+let matchData = firestore.doc(`torneos/${localStorage.getItem("Torneo")}/partidos/${localStorage.getItem("ID")}`)
 let arrayPartido =[]
 let arrayQ1 =[]
 let arrayQ2 =[]
